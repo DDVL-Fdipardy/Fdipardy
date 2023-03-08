@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        default_schema: public
+  datasource:
+    url: jdbc:postgresql://localhost:5444/fdipardyDB
+    username: admin
+    password: nimda
+  liquibase:
+    change-log: classpath:db/changelog/main.xml
+    enabled: true
+  output:
+    ansi:
+      enabled: ALWAYS
