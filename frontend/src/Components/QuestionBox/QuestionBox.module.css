@@ -1,0 +1,15 @@
+.box {
+  margin: 5px;
+  border: 1px solid;
+  border-color: blue;
+  background-color: azure;
+  width: 5rem;
+  height: 3rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  font-weight: bold;
+  font-size: medium;
+}
