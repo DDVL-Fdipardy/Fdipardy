@@ -1,3 +1,4 @@
+import nextId from "react-id-generator";
 import QuestionBox from "../QuestionBox/QuestionBox";
 import styles from "./MainContainer.module.css";
 
@@ -7,11 +8,15 @@ const MainContainer = () => {
 
     let boxScore = 100;
     for (let i = 0; i < 4; i++) {
-      generatedBoxes.push(<QuestionBox score={boxScore} />);
+      generatedBoxes.push(<QuestionBox key={nextId()} score={boxScore} />);
       boxScore += 100;
     }
 
-    return <div className={styles.columnItems}>{generatedBoxes}</div>;
+    return (
+      <div key={nextId()} className={styles.columnItems}>
+        {generatedBoxes}
+      </div>
+    );
   };
 
   return (
