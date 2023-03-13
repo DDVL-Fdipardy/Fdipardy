@@ -9,6 +9,12 @@
   display: flex;
 }
 
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .columnItems {
   display: flex;
   flex-direction: column;

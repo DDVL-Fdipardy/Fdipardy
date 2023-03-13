@@ -3,7 +3,7 @@ import styles from "./MainContainer.module.css";
 
 const MainContainer = () => {
   const generateQuestionBoxColumns = (): JSX.Element => {
-    const generatedBoxes: JSX.Element[] = [];
+    const generatedBoxes: JSX.Element[] = [<div className={styles.category}>Category</div>];
 
     let boxScore = 100;
     for (let i = 0; i < 4; i++) {
