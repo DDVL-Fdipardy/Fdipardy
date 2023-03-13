@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+
+  fdipardy-db:
+    image: postgres:14.1
+    container_name: fdipardy-db
+    restart: always
+    environment:
+      - POSTGRES_DB=fdipardyDB
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=nimda
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - '5444:5432'
+    volumes:
+      - fdipardy-data:/var/lib/postgresql/data/
+
+volumes:
+  fdipardy-data:
+
+

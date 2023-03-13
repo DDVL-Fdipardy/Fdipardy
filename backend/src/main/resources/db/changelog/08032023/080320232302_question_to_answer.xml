@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+  <!--ADD COLUMN IN QUESTION TABLE FOR ANSWER ID-->
+    <changeSet id="connect_question_to_answer" author="dsimeonova">
+      <addColumn tableName="question">
+        <column name="answer_id" type="bigint"/>
+      </addColumn>
+    </changeSet>
+<!--END HERE-->
+
+  <!-- CREATE FOREIGN KEY FOR ANSWER ID IN QUESTION TABLE -->
+  <changeSet id="added_fk_question_to_answer_table" author="dsimeonova">
+    <addForeignKeyConstraint baseTableName="question" baseColumnNames="answer_id"
+                             constraintName="fk_question_to_answer"
+                             referencedTableName="answer" referencedColumnNames="id"/>
+  </changeSet>
+  <!--END HERE-->
+
+
+  <!--ADD COLUMN IN ANSWER TABLE FOR QUESTION ID-->
+  <changeSet id="connect_answer_to_question" author="dsimeonova">
+    <addColumn tableName="answer">
+      <column name="question_id" type="bigint"/>
+    </addColumn>
+  </changeSet>
+  <!--END HERE-->
+
+  <!-- CREATE FOREIGN KEYS -->
+  <changeSet id="added_fk_answer_to_question_table" author="dsimeonova">
+    <addForeignKeyConstraint baseTableName="answer" baseColumnNames="question_id"
+                             constraintName="fk_answer_to_question"
+                             referencedTableName="question" referencedColumnNames="id"/>
+  </changeSet>
+  <!--END HERE-->
+
+
+
+</databaseChangeLog>
