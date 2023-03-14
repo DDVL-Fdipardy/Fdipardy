@@ -1,4 +1,5 @@
 import nextId from "react-id-generator";
+import PlayerBox from "../PlayerBox/PlayerBox";
 import QuestionBox from "../QuestionBox/QuestionBox";
 import styles from "./MainContainer.module.css";
 
@@ -28,6 +29,11 @@ const MainContainer = () => {
         {generateQuestionBoxColumns()}
         {generateQuestionBoxColumns()}
         {generateQuestionBoxColumns()}
+      </div>
+      <div className={styles.playerContainer}>
+        <PlayerBox key={"player1"} name={"Player 1"} score={100} color={"aquamarine"} />
+        <PlayerBox key={"player2"} name={"Player 2"} score={100} color={"salmon"} />
+        <PlayerBox key={"player3"} name={"Player 3"} score={100} color={"lightgreen"} />
       </div>
     </div>
   );
