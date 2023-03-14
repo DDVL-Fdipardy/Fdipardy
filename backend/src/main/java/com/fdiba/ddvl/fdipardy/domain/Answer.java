@@ -1,10 +1,13 @@
 package com.fdiba.ddvl.fdipardy.domain;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "answer")
+@Builder
 public class Answer {
 
     @Id
