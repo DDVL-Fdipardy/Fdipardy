@@ -26,7 +26,7 @@ public class PlayerServiceImpl implements PlayerService {
             throw new HttpServerErrorException(HttpStatus.NO_CONTENT);
         }
         Player player = playerMapper.toEntity(playerDTO);
-        player = playerRepository.save(player);
+        player = playerRepository.save(player); //TODO refactoring
         if(player.getId() != null){
             return playerMapper.toDTO(player);
         }
