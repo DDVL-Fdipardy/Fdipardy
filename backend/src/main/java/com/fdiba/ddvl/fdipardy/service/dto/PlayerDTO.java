@@ -1,82 +1,69 @@
-package com.fdiba.ddvl.fdipardy.domain;
+package com.fdiba.ddvl.fdipardy.service.dto;
 
 import lombok.Builder;
 
-import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "player")
 @Builder
-public class Player {
-    @Id
-    @GeneratedValue(generator = "player_sequence_generator", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "player_sequence_generator", initialValue = 1000, allocationSize = 1)
+public class PlayerDTO implements Serializable {
+
     private Long id;
 
-    @Column
     private String nickname;
 
-    @Column
     private Long points;
 
-    @Column
     private Long highScore;
 
-    //constructor with all arguments:
-    public Player(Long id, String nickname, Long points, Long highScore) {
+    public PlayerDTO(Long id, String nickname, Long points, Long highScore) {
         this.id = id;
         this.nickname = nickname;
         this.points = points;
         this.highScore = highScore;
     }
 
-    //constructor with no arguments:
-    public Player(){
-
+    public PlayerDTO() {
     }
 
-    //setters:
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public void setPoints(Long points) {
-        this.points = points;
-    }
-
-    public void setHighScore(Long highScore) {
-        this.highScore = highScore;
-    }
-
-    //getter:
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNickname() {
         return nickname;
     }
 
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public Long getPoints() {
         return points;
+    }
+
+    public void setPoints(Long points) {
+        this.points = points;
     }
 
     public Long getHighScore() {
         return highScore;
     }
 
-    //hashCode() and equals()
+    public void setHighScore(Long highScore) {
+        this.highScore = highScore;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Player player = (Player) o;
-        return id.equals(player.id);
+        PlayerDTO playerDTO = (PlayerDTO) o;
+        return Objects.equals(id, playerDTO.id);
     }
 
     @Override
@@ -84,10 +71,9 @@ public class Player {
         return Objects.hash(id);
     }
 
-    //toString()
     @Override
     public String toString() {
-        return "Player{" +
+        return "PlayerDTO{" +
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
                 ", points=" + points +

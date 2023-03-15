@@ -1,6 +1,7 @@
 package com.fdiba.ddvl.fdipardy.domain;
 
 import com.sun.istack.NotNull;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "thema")
+@Builder
 public class Thema {
     @Id
     @GeneratedValue(generator = "thema_sequence_generator", strategy = GenerationType.SEQUENCE)
