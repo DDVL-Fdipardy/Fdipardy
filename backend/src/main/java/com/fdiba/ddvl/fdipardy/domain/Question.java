@@ -27,10 +27,11 @@ public class Question {
 
 
     //constructor with all arguments:
-    public Question(Long id, String title, Long points) {
+    public Question(Long id, String title, Long points, Thema thema) {
         this.id = id;
         this.title = title;
         this.points = points;
+        this.thema = thema;
     }
 
     //constructor with no arguments:
