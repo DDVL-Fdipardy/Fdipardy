@@ -22,6 +22,7 @@ const MainContainer = () => {
 
   return (
     <div className={styles.mainContainer}>
+      <p className={styles.paragraph}>Welcome to</p>
       <h1 className={styles.title}>FDIPARDY</h1>
       <div className={styles.questionsContainer}>
         {generateQuestionBoxColumns()}
