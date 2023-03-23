@@ -35,3 +35,14 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.paragraph {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  vertical-align: middle;
+  margin-bottom: 0px;
+  margin-top: 108px;
+  font-size: 21px;
+}
+
