@@ -4,6 +4,7 @@ import com.fdiba.ddvl.fdipardy.domain.Answer;
 import com.fdiba.ddvl.fdipardy.service.AnswerService;
 import com.fdiba.ddvl.fdipardy.web.rest.AnswerResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class AnswerResourceImpl implements AnswerResource {
     }
 
     @Override
-    public Answer getById(Long id) {
+    public Answer getById(@PathVariable Long id) {
         return answerService.getById(id);
     }
 

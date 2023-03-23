@@ -5,6 +5,7 @@ import com.fdiba.ddvl.fdipardy.repository.PlayerRepository;
 import com.fdiba.ddvl.fdipardy.service.PlayerService;
 import com.fdiba.ddvl.fdipardy.service.dto.PlayerDTO;
 import com.fdiba.ddvl.fdipardy.service.mapper.PlayerMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
@@ -15,8 +16,10 @@ import java.util.Optional;
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
+    @Autowired
     private PlayerMapper playerMapper;
 
+    @Autowired
     private PlayerRepository playerRepository;
 
     @Override
