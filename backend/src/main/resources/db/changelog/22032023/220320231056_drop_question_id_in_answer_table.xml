@@ -1,0 +1,27 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <!--DROP FOREIGN KEY CONSTRAINT FOR QUESTION_ID IN ANSWER TABLE-->
+    <changeSet id="drop_fk_constraint_answer_to_question_table" author="dsimeonova">
+        <preConditions>
+            <foreignKeyConstraintExists foreignKeyTableName="answer"
+                                        foreignKeyName="fk_answer_to_question"/>
+        </preConditions>
+
+      <dropForeignKeyConstraint  baseTableName="answer"
+                                 constraintName="fk_answer_to_question"/>
+
+    </changeSet>
+
+    <!--DROP COLUMN QUESTION_ID IN ANSWER TABLE-->
+    <changeSet id="drop_fk_answer_to_question_table" author="dsimeonova">
+        <dropColumn columnName="question_id"
+                    schemaName="public"
+                    tableName="answer">
+        </dropColumn>
+    </changeSet>
+
+</databaseChangeLog>

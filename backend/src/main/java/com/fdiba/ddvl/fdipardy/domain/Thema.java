@@ -20,14 +20,14 @@ public class Thema {
     @Column
     private String title;
 
-    @OneToMany(mappedBy = "thema", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "themaId", fetch = FetchType.EAGER)
     private List<Question> questions;
 
     //constructor with all arguments:
     public Thema(Long id, String title, List<Question> questions) {
         this.id = id;
         this.title = title;
-//        this.questions = questions;
+        this.questions = questions;
     }
 
 

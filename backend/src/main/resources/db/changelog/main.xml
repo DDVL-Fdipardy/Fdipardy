@@ -4,14 +4,18 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
-    <!-- CREATE TABELS -->
+    <!-- CREATE TABLES -->
     <include file = "db/changelog/08032023/080320230930_create_table_player.xml" relativeToChangelogFile="false"/>
     <include file = "db/changelog/08032023/080320232218_create_table_answer.xml" relativeToChangelogFile="false"/>
     <include file = "db/changelog/08032023/080320232211_create_table_thema.xml" relativeToChangelogFile="false"/>
     <include file = "db/changelog/08032023/080320232219_create_table_question.xml" relativeToChangelogFile="false"/>
     <!--END HERE-->
 
-    <!--ADD RELATIONSHIP BETWEEN QUESTION AND ANSWER TABELS-->
+    <!--ADD RELATIONSHIP BETWEEN QUESTION AND ANSWER TABLES-->
     <include file = "db/changelog/08032023/080320232302_question_to_answer.xml" relativeToChangelogFile="false"/>
+    <!--DROP QUESTION_ID COLUMN IN ANSWER TABLE-->
+    <include file = "db/changelog/22032023/220320231056_drop_question_id_in_answer_table.xml" relativeToChangelogFile="false"/>
+    <!--POPULATE ANSWER, THEMA & QUESTION TABLES-->
+    <include file = "db/changelog/22032023/220320231501_populate_thema_answer_question.xml" relativeToChangelogFile="false"/>
 
     </databaseChangeLog>

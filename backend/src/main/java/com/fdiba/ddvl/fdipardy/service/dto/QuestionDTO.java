@@ -1,5 +1,6 @@
 package com.fdiba.ddvl.fdipardy.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fdiba.ddvl.fdipardy.domain.Thema;
 import lombok.Builder;
 
@@ -15,13 +16,16 @@ public class QuestionDTO implements Serializable {
 
     private Long points;
 
-    private Thema thema;
+    private Long themaId;
 
-    public QuestionDTO(Long id, String title, Long points, Thema thema) {
+    private Long answerId;
+
+    public QuestionDTO(Long id, String title, Long points, Long themaId, Long answerId) {
         this.id = id;
         this.title = title;
         this.points = points;
-        this.thema = thema;
+        this.themaId = themaId;
+        this.answerId=answerId;
     }
 
     public QuestionDTO() {
@@ -51,12 +55,20 @@ public class QuestionDTO implements Serializable {
         this.points = points;
     }
 
-    public Thema getThema() {
-        return thema;
+    public Long getThemaId() {
+        return themaId;
     }
 
-    public void setThema(Thema thema) {
-        this.thema = thema;
+    public void setThemaId(Long themaId) {
+        this.themaId = themaId;
+    }
+
+    public Long getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(Long answerId) {
+        this.answerId = answerId;
     }
 
     @Override
@@ -78,7 +90,8 @@ public class QuestionDTO implements Serializable {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", points=" + points +
-                ", thema=" + thema +
+                ", themaId=" + themaId +
+                ", answerId=" + answerId +
                 '}';
     }
 }
