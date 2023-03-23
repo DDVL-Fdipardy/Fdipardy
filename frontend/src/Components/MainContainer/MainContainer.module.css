@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&family=Permanent+Marker');
 .mainContainer {
   display: flex;
   flex-direction: column;
@@ -30,7 +32,14 @@
 }
 
 .title {
-  color: blue;
+  
+  font-family: 'Rubik Puddles', cursive;
+  letter-spacing: 19px;
+  margin-top: 6px;
+  font-size: 66px;
+  text-shadow: 20px 20px 20px #91e9d2;
+  color: white;
+  color: rgb(202, 219, 234);
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -54,6 +63,10 @@
   margin-bottom: 0px;
   margin-top: 108px;
   font-size: 21px;
+  font-family: 'Permanent Marker', cursive;
+  color: rgb(192, 217, 239);
+  font-size: 35px;
+  
   
 }
 
