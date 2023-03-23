@@ -1,5 +1,6 @@
 package com.fdiba.ddvl.fdipardy.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 
 import javax.persistence.*;
@@ -21,17 +22,24 @@ public class Question {
     @Column
     private Long points;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Thema thema;
+//    @ManyToOne
+//    @JoinColumn(nullable = false)
+//    private Long thema;
+
+    @Column
+    private Long themaId;
+
+    @Column
+    private Long answerId;
 
 
     //constructor with all arguments:
-    public Question(Long id, String title, Long points, Thema thema) {
+    public Question(Long id, String title, Long points, Long themaId, Long answerId) {
         this.id = id;
         this.title = title;
         this.points = points;
-        this.thema = thema;
+        this.themaId = themaId;
+        this.answerId = answerId;
     }
 
     //constructor with no arguments:
@@ -64,6 +72,22 @@ public class Question {
         this.points = points;
     }
 
+    public Long getThemaId() {
+        return themaId;
+    }
+
+    public void setThemaId(Long themaId) {
+        this.themaId = themaId;
+    }
+
+    public Long getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(Long answerId) {
+        this.answerId = answerId;
+    }
+
     //hashCode() and equals()
     @Override
     public boolean equals(Object o) {
@@ -85,6 +109,8 @@ public class Question {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", points=" + points +
+                ", themaId=" + themaId +
+                ", answerId=" + points +
                 '}';
     }
 }
