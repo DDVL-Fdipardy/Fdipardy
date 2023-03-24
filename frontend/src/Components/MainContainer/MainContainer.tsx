@@ -1,9 +1,16 @@
+import { useEffect } from "react";
 import nextId from "react-id-generator";
 import PlayerBox from "../PlayerBox/PlayerBox";
 import QuestionBox from "../QuestionBox/QuestionBox";
 import styles from "./MainContainer.module.css";
+import { httpService } from "../../Services/httpService";
 
 const MainContainer = () => {
+  useEffect(() => {
+    const test = new httpService().getCategories();
+    console.log("Test: ", test);
+  }, []);
+
   const generateQuestionBoxColumns = (): JSX.Element => {
     const generatedBoxes: JSX.Element[] = [<div className={styles.category}>Category</div>];
 
