@@ -10,8 +10,7 @@
         <loadData file="db/changelog/population/thema.csv"
                   schemaName="public"
                   separator=";"
-                  tableName="thema"
-                  usePreparedStatements="true">
+                  tableName="thema">
             <column name="id" type="bigint"/>
             <column name="title" type="varchar(255)"/>
         </loadData>
@@ -22,10 +21,23 @@
         <loadData file="db/changelog/population/answer.csv"
                   schemaName="public"
                   separator=";"
-                  tableName="answer"
-                  usePreparedStatements="true">
+                  tableName="answer">
             <column name="id" type="bigint"/>
             <column name="title" type="varchar(255)"/>
+        </loadData>
+    </changeSet>
+
+    <!--POPULATE QUESTION TABLE-->
+    <changeSet id="populate_table_question" author="dsimeonova">
+        <loadData file="db/changelog/population/question.csv"
+                  schemaName="public"
+                  separator=";"
+                  tableName="question">
+            <column name="id" type="bigint"/>
+            <column name="title" type="varchar(255)"/>
+            <column name="points" type="varchar(255)"/>
+            <column name="thema_id" type="bigint"/>
+            <column name="answer_id" type="bigint"/>
         </loadData>
     </changeSet>
 </databaseChangeLog>

@@ -22,10 +22,6 @@ public class Question {
     @Column
     private Long points;
 
-//    @ManyToOne
-//    @JoinColumn(nullable = false)
-//    private Long thema;
-
     @Column
     private Long themaId;
 
