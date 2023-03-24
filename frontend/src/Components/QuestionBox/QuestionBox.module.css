@@ -7,6 +7,7 @@
   border-block-end-width: 7px;
   border-block-end-color: rgb(130, 191, 244);
   border-block-start-color: rgb(130, 191, 244);
+  
   width: 5rem;
   height: 3rem;
   cursor: pointer;
@@ -18,3 +19,5 @@
   font-size: 26px;
   padding: 15px;
 }
+
+
