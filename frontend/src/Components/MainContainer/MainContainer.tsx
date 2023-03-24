@@ -32,9 +32,9 @@ const MainContainer = () => {
         {generateQuestionBoxColumns()}
       </div>
       <div className={styles.playerContainer}>
-        <PlayerBox key={"player1"} name={"Player 1"} score={100} color={"aquamarine"} />
-        <PlayerBox key={"player2"} name={"Player 2"} score={100} color={"salmon"} />
-        <PlayerBox key={"player3"} name={"Player 3"} score={100} color={"lightgreen"} />
+        <PlayerBox key={"player1"} name={"Player 1"} score={100} color={"rgb(223, 255, 216)"} />
+        <PlayerBox key={"player2"} name={"Player 2"} score={100} color={"rgb(254, 222, 255)"} />
+        <PlayerBox key={"player3"} name={"Player 3"} score={100} color={"rgb(223, 255, 216)"} />
       </div>
     </div>
   );
