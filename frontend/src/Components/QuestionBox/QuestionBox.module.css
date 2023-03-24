@@ -1,8 +1,12 @@
 .box {
   margin: 5px;
-  border: 1px solid;
-  border-color: blue;
-  background-color: azure;
+  border: 7px dotted;
+  border-color: #c793c7;
+  background-color: #FFEAEA;
+  
+  border-block-end-width: 7px;
+  border-block-end-color: rgb(130, 191, 244);
+  border-block-start-color: rgb(130, 191, 244);
   width: 5rem;
   height: 3rem;
   cursor: pointer;
@@ -12,5 +16,5 @@
   flex-wrap: wrap;
   font-weight: bold;
   font-size: 26px;
-  padding: 18px;
+  padding: 15px;
 }
