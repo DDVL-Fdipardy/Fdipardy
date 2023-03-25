@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IAnswer } from "../Types/IAnswer";
 import { ICategory } from "../Types/ICategory";
 
 export class httpService {
@@ -14,10 +15,15 @@ export class httpService {
       });
   }
 
-  getAnswers() {
-    axios
-      .get("http://localhost:8080/fdipardy/api/answers")
-      .then((data) => console.log(data.data))
-      .catch((err) => console.log(err));
+  getAnswers(): Promise<IAnswer[] | null> {
+    return axios
+      .get<IAnswer[]>("http://localhost:8080/fdipardy/api/answers")
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+        return null;
+      });
   }
 }

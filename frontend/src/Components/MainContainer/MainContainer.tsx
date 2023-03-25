@@ -5,14 +5,18 @@ import QuestionBox from "../QuestionBox/QuestionBox";
 import styles from "./MainContainer.module.css";
 import { httpService } from "../../Services/httpService";
 import { ICategory } from "../../Types/ICategory";
+import { IAnswer } from "../../Types/IAnswer";
 
 const MainContainer = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
+  const [answers, setAnswers] = useState<IAnswer[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response: ICategory[] | null = await new httpService().getCategories();
-      if (response) setCategories(response);
+      const responseTopics: ICategory[] | null = await new httpService().getCategories();
+      if (responseTopics) setCategories(responseTopics);
+      const responseAnswers: IAnswer[] | null = await new httpService().getAnswers();
+      if (responseAnswers) setAnswers(responseAnswers);
     };
 
     fetchData();
@@ -34,7 +38,6 @@ const MainContainer = () => {
     );
   };
 
-  console.log("Final categories: ", categories);
   return (
     <div className={styles.mainContainer}>
       <h1 className={styles.title}>FDIPARDY</h1>
