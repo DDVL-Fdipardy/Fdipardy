@@ -1,14 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import nextId from "react-id-generator";
 import PlayerBox from "../PlayerBox/PlayerBox";
 import QuestionBox from "../QuestionBox/QuestionBox";
 import styles from "./MainContainer.module.css";
 import { httpService } from "../../Services/httpService";
+import { ICategory } from "../../Types/ICategory";
 
 const MainContainer = () => {
+  const [categories, setCategories] = useState<ICategory[]>([]);
+
   useEffect(() => {
-    const test = new httpService().getCategories();
-    console.log("Test: ", test);
+    const fetchData = async () => {
+      const response: ICategory[] | null = await new httpService().getCategories();
+      if (response) setCategories(response);
+    };
+
+    fetchData();
   }, []);
 
   const generateQuestionBoxColumns = (): JSX.Element => {
@@ -27,6 +34,7 @@ const MainContainer = () => {
     );
   };
 
+  console.log("Final categories: ", categories);
   return (
     <div className={styles.mainContainer}>
       <h1 className={styles.title}>FDIPARDY</h1>

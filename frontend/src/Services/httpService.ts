@@ -1,24 +1,23 @@
 import axios from "axios";
+import { ICategory } from "../Types/ICategory";
 
 export class httpService {
-  getCategories() {
-    axios
-      .get("http://localhost:8080/fdipardy/api/themas")
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
-  }
-
-  getQuestions() {
-    axios
-      .get("http://localhost:8080/fdipardy/api/questions")
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+  getCategories(): Promise<ICategory[] | null> {
+    return axios
+      .get<ICategory[]>("http://localhost:8080/fdipardy/api/themas")
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+        return null;
+      });
   }
 
   getAnswers() {
     axios
       .get("http://localhost:8080/fdipardy/api/answers")
-      .then((data) => console.log(data))
+      .then((data) => console.log(data.data))
       .catch((err) => console.log(err));
   }
 }
