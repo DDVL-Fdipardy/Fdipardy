@@ -32,10 +32,18 @@
   margin-top: 0px;
   text-shadow: 6px 4px 22px  #d1ba68;
   letter-spacing: normal;
+  animation: flip 5s infinite;
+  animation-delay: calc(.15s * var(--i))
+}
+
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
 }
 
 .category:hover {
-  background-color: rgb(201, 239, 250);
+  background-color: rgb(171, 214, 253);
 }
 
 .columnItems {
@@ -81,7 +89,6 @@
   color: rgb(192, 217, 239);
   font-size: 39px;
   margin-top: 23px;
-  
 }
 
 
