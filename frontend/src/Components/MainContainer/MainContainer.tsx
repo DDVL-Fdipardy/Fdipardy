@@ -11,7 +11,7 @@ import { generateFullCategories } from "../../Helpers/helper";
 const MainContainer = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [answers, setAnswers] = useState<IAnswer[]>([]);
-  // const [fullCategory, setFullCategory] = useState<IFullCategory[]>([]);
+  const [fullCategories, setFullCategories] = useState<IFullCategory[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,14 +24,23 @@ const MainContainer = () => {
     fetchData();
   }, []);
 
-  const generateQuestionBoxColumns = (): JSX.Element => {
-    const generatedBoxes: JSX.Element[] = [<div className={styles.category}>Category</div>];
+  useEffect(() => {
+    const extendedTopics: IFullCategory[] = generateFullCategories(categories, answers);
+    setFullCategories(extendedTopics);
+  }, [categories, answers]);
 
-    let boxScore = 100;
-    for (let i = 0; i < 4; i++) {
-      generatedBoxes.push(<QuestionBox key={nextId()} score={boxScore} />);
-      boxScore += 100;
-    }
+  const generateQuestionBoxColumns = (category: IFullCategory): JSX.Element => {
+    const generatedBoxes: JSX.Element[] = [
+      <div key={nextId()} className={styles.category}>
+        {category.title}
+      </div>,
+    ];
+
+    category.questions.map((question) => {
+      generatedBoxes.push(
+        <QuestionBox key={question.id} score={question.points} question={question.title} answer={question.answer} />
+      );
+    });
 
     return (
       <div key={nextId()} className={styles.columnItems}>
@@ -40,16 +49,11 @@ const MainContainer = () => {
     );
   };
 
-  console.log("Result: ", generateFullCategories(categories, answers));
   return (
     <div className={styles.mainContainer}>
       <h1 className={styles.title}>FDIPARDY</h1>
       <div className={styles.questionsContainer}>
-        {generateQuestionBoxColumns()}
-        {generateQuestionBoxColumns()}
-        {generateQuestionBoxColumns()}
-        {generateQuestionBoxColumns()}
-        {generateQuestionBoxColumns()}
+        {fullCategories.map((category) => generateQuestionBoxColumns(category))}
       </div>
       <div className={styles.playerContainer}>
         <PlayerBox key={"player1"} name={"Player 1"} score={100} color={"aquamarine"} />
