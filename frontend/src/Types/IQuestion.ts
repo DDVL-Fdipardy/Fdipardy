@@ -5,3 +5,7 @@ export interface IQuestion {
   themaId: number;
   title: string;
 }
+
+export interface IQuestionWithAnswer extends IQuestion {
+  answer: string;
+}

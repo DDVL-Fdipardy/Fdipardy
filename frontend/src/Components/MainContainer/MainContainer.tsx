@@ -4,12 +4,14 @@ import PlayerBox from "../PlayerBox/PlayerBox";
 import QuestionBox from "../QuestionBox/QuestionBox";
 import styles from "./MainContainer.module.css";
 import { httpService } from "../../Services/httpService";
-import { ICategory } from "../../Types/ICategory";
+import { ICategory, IFullCategory } from "../../Types/ICategory";
 import { IAnswer } from "../../Types/IAnswer";
+import { generateFullCategories } from "../../Helpers/helper";
 
 const MainContainer = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [answers, setAnswers] = useState<IAnswer[]>([]);
+  // const [fullCategory, setFullCategory] = useState<IFullCategory[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +40,7 @@ const MainContainer = () => {
     );
   };
 
+  console.log("Result: ", generateFullCategories(categories, answers));
   return (
     <div className={styles.mainContainer}>
       <h1 className={styles.title}>FDIPARDY</h1>
