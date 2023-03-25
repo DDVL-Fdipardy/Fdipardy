@@ -2,7 +2,8 @@
   margin: 5px;
   border: 7px dotted;
   border-color: #c793c7;
-  background-color: #FFEAEA;
+  
+  animation: move 5s infinite;
   
   border-block-end-width: 7px;
   border-block-end-color: rgb(130, 191, 244);
@@ -26,6 +27,15 @@
   border-bottom-right-radius: 15px 20px;
   border-bottom-left-radius: 15px 20px;
   
+  
+}
+
+
+
+@keyframes move {
+  from {background-color: #FFEAEA;}
+  to {background-color: rgb(255, 222, 250);}
+
 }
 
 
