@@ -14,7 +14,6 @@
   background-size: cover;
   background-position: center;
   height: 754px;
-  
 }
 
 .questionsContainer {
@@ -47,6 +46,7 @@
   justify-content: flex-start;
   font-family: 'Shantell Sans', cursive;
   color: rgb(62, 84, 172);
+  text-shadow: 6px 4px 23px  rgb(51, 47, 208);
 }
 
 .title {
@@ -63,7 +63,6 @@
   align-items: center;
   vertical-align: middle;
   margin-bottom: 14px;
-  
 }
 
 .playerContainer {
