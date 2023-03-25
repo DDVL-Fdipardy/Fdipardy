@@ -32,18 +32,11 @@
   animation: gradient 6s ease infinite;
 }
   
-  
-
-
-
-
-@keyframes move {
+  @keyframes move {
   from {background-color: #FFEAEA;}
   to {background-color: rgb(255, 222, 250);}
 
 }
-
-
 
 @keyframes gradient {
     0% {
