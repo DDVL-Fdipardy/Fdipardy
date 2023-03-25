@@ -17,7 +17,7 @@
     padding: 14px;
     margin-top: 10px;
     padding: 16px;
-    color:rgb(179, 255, 174);
+    color:rgb(243, 204, 255);
     font-size: 23px;
     text-align: center;
     padding-right: 30px;
@@ -32,27 +32,13 @@
     border-top-left-radius: 15px 25px;
     text-shadow: 6px 4px 25px  rgb(179, 255, 174);
 
-    background: linear-gradient(-45deg, rgb(247, 200, 224), #f983b0, #53c1e9, #53eeca);
-    background-size: 400% 400%;
-    animation: gradient 6s ease infinite;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    
 }
     
 
 
 .playerContainer :hover {
-    color: rgb(243, 204, 255);
+    color: rgb(179, 255, 174);
     
 }
 
