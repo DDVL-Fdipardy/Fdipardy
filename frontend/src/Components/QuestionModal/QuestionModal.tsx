@@ -1,8 +1,8 @@
 import { IQuestionModalProps } from "./IQuestionModalProps";
-import styles from "./QuestionModal.module.scss";
+import styles from "./QuestionModal.module.css";
 
 const QuestionModal = (props: IQuestionModalProps) => {
-  const { isModalVisible, question, answer } = props;
+  const { isModalVisible, question, answer, onClose } = props;
 
   if (!isModalVisible) {
     return <></>;
@@ -16,7 +16,9 @@ const QuestionModal = (props: IQuestionModalProps) => {
         </div>
         <div className={styles.modalBody}>{answer}</div>
         <div className={styles.modalFooter}>
-          <button className="button">Close</button>
+          <button className="button" onClick={onClose}>
+            Close
+          </button>
         </div>
       </div>
     </div>
