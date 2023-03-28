@@ -31,15 +31,24 @@
     border-top-right-radius: 1px 25px;
     border-top-left-radius: 15px 25px;
     text-shadow: 6px 4px 25px  rgb(179, 255, 174);
-
-    
 }
-    
-
 
 .playerContainer :hover {
     color: rgb(179, 255, 174);
-    
 }
+
+@media screen and (max-width: 600px) {
+    .playerContainer{
+        font-size: 20px;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-right: 30px;
+        margin-left: 10px;
+    }
+
+}
+    
+
+
 
 
