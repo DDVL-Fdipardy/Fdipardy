@@ -7,11 +7,15 @@ import { httpService } from "../../Services/httpService";
 import { ICategory, IFullCategory } from "../../Types/ICategory";
 import { IAnswer } from "../../Types/IAnswer";
 import { generateFullCategories } from "../../Helpers/helper";
+import QuestionModal from "../QuestionModal/QuestionModal";
 
 const MainContainer = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [answers, setAnswers] = useState<IAnswer[]>([]);
   const [fullCategories, setFullCategories] = useState<IFullCategory[]>([]);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [selectedQuestion, setSelectedQuestion] = useState<string>("");
+  const [selectedAnswer, setSelectedAnswer] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +42,13 @@ const MainContainer = () => {
 
     category.questions.map((question) => {
       generatedBoxes.push(
-        <QuestionBox key={question.id} score={question.points} question={question.title} answer={question.answer} />
+        <QuestionBox
+          key={question.id}
+          score={question.points}
+          question={question.title}
+          answer={question.answer}
+          onQuestionClick={handleQuestionClick}
+        />
       );
     });
 
@@ -47,6 +57,18 @@ const MainContainer = () => {
         {generatedBoxes}
       </div>
     );
+  };
+
+  const handleQuestionClick = (question: string, answer: string) => {
+    setIsModalVisible(true);
+    setSelectedQuestion(question);
+    setSelectedAnswer(answer);
+  };
+
+  const handleClose = () => {
+    setIsModalVisible(false);
+    setSelectedQuestion("");
+    setSelectedAnswer("");
   };
 
   return (
@@ -59,6 +81,14 @@ const MainContainer = () => {
         <PlayerBox key={"player1"} name={"Player 1"} score={100} color={"aquamarine"} />
         <PlayerBox key={"player2"} name={"Player 2"} score={100} color={"salmon"} />
         <PlayerBox key={"player3"} name={"Player 3"} score={100} color={"lightgreen"} />
+      </div>
+      <div>
+        <QuestionModal
+          onClose={handleClose}
+          isModalVisible={isModalVisible}
+          answer={selectedAnswer}
+          question={selectedQuestion}
+        />
       </div>
     </div>
   );

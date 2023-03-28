@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Shantell+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@600&display=swap");
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modalContent {
+  width: 500px;
+  background-color: #f5cdf5;
+  border: 7px solid rgb(130, 191, 244);
+  border-top-right-radius: 15px 20px;
+  border-top-left-radius: 15px 20px;
+
+  border-bottom-right-radius: 15px 20px;
+  border-bottom-left-radius: 15px 20px;
+}
+.modalHeader,
+.modalFooter {
+  padding: 10px;
+}
+.modalTitle {
+  margin: 0;
+  font-family: "Shantell Sans", cursive;
+}
+.modalBody {
+  padding: 10px;
+  font-family: "Frank Ruhl Libre", serif;
+  border-top: 2px dashed rgb(130, 191, 244);
+  border-bottom: 2px dashed rgb(130, 191, 244);
+}
+.modalButton {
+  display: grid;
+  margin: auto;
+  background: linear-gradient(-45deg, #ffeaea, rgb(145, 210, 240), rgb(210, 74, 190));
+  background-size: 400% 400%;
+  animation: gradient 6s ease infinite;
+  padding: 10px;
+  border: rgb(130, 191, 244);
+  border-top-right-radius: 15px 20px;
+  border-top-left-radius: 15px 20px;
+
+  border-bottom-right-radius: 15px 20px;
+  border-bottom-left-radius: 15px 20px;
+  font-size: 15px;
+  font-style: oblique;
+  font-weight: bold;
+}
+
+@keyframes move {
+  from {
+    background-color: #ffeaea;
+  }
+  to {
+    background-color: rgb(255, 222, 250);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
