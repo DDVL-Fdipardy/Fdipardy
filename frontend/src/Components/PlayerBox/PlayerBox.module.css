@@ -1,9 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@600&display=swap');
+
 .playerContainer {
+    background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20201030/pngtree-galaxy-blue-and-purple-background-image_447543.jpg");
+    background-size: cover;
+    background-position: center;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     width: 6rem;
-    height: 3rem;
-    border: 1px solid blue;
+   
+    border: 7px groove rgb(28, 214, 206);
     align-items: center;
+
+    font-family: 'Frank Ruhl Libre', serif;
+    font-style: oblique;
+    padding: 14px;
+    margin-top: 10px;
+    padding: 16px;
+    color:rgb(243, 204, 255);
+    font-size: 23px;
+    text-align: center;
+    padding-right: 30px;
+    padding-left: 30px;
+   
+    border-block-start-color: rgb(216, 0, 166);
+    border-block-end-color: rgb(216, 0, 166);
+    border-bottom-right-radius: 10px 25px;
+    border-bottom-left-radius: 1px 25px;
+
+    border-top-right-radius: 1px 25px;
+    border-top-left-radius: 15px 25px;
+    text-shadow: 6px 4px 25px  rgb(179, 255, 174);
 }
+
+.playerContainer :hover {
+    color: rgb(179, 255, 174);
+}
+
+
+
+
+
+

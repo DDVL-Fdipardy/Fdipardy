@@ -1,8 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&family=Permanent+Marker');
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans&display=swap');
+
 .mainContainer {
   display: flex;
   flex-direction: column;
   align-content: center;
   flex-wrap: wrap;
+  background-image: url('file:///D:/Jeopardy%20-%20Fdipardy/App/Fdipardy/frontend/src/images/space-galaxy-background-free-vector.webp');
+  background-size: cover;
+  background-position: center;
+  height: 754px;
 }
 
 .questionsContainer {
@@ -10,28 +21,91 @@
 }
 
 .category {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-style: oblique;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 30px;
+  color: #c793c7;
+  margin-right: 32px;
+  margin-top: 0px;
+  text-shadow: 6px 4px 22px  #d1ba68;
+  letter-spacing: normal;
+  animation: flip 5s infinite;
+}
+
+@keyframes flip {
+  0%,80% {
+    transform: rotateY(360deg) 
+  }
+}
+
+.category:hover {
+  background-color: rgb(171, 214, 253);
 }
 
 .columnItems {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  font-family: 'Shantell Sans', cursive;
+  color: rgb(62, 84, 172);
+  text-shadow: 6px 4px 23px  rgb(51, 47, 208);
 }
 
 .title {
-  color: blue;
+  font-family: 'Rubik Puddles', cursive;
+  letter-spacing: 19px;
+  margin-top: 6px;
+  
+  font-size: 80px;
+  text-shadow: 10px 4px 20px #91e9d2;
+  color: rgb(192, 217, 239);
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
   vertical-align: middle;
+  margin-bottom: 14px;
 }
 
 .playerContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  
 }
+
+.paragraph {
+  font-family: 'Permanent Marker', cursive;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  vertical-align: middle;
+  margin-bottom: 0px;
+  
+  color: rgb(192, 217, 239);
+  font-size: 39px;
+  margin-top: 23px;
+}
+
+
+
+
+
+  
+ 
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+
+  
+

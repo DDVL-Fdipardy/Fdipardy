@@ -1,8 +1,14 @@
 .box {
   margin: 5px;
-  border: 1px solid;
-  border-color: blue;
-  background-color: azure;
+  border: 7px dotted;
+  border-color: #c793c7;
+  
+  animation: move 5s infinite;
+  
+  border-block-end-width: 7px;
+  border-block-end-color: rgb(130, 191, 244);
+  border-block-start-color: rgb(130, 191, 244);
+  
   width: 5rem;
   height: 3rem;
   cursor: pointer;
@@ -11,5 +17,38 @@
   align-content: center;
   flex-wrap: wrap;
   font-weight: bold;
-  font-size: medium;
+  font-size: 25px;
+  padding: 13px;
+  margin-bottom: 9px;
+
+  border-top-right-radius: 15px 20px;
+  border-top-left-radius: 15px 20px;
+
+  border-bottom-right-radius: 15px 20px;
+  border-bottom-left-radius: 15px 20px;
+  
+  background: linear-gradient(-45deg, #FFEAEA, rgb(145, 210, 240), rgb(210, 74, 190));
+  background-size: 400% 400%;
+  animation: gradient 6s ease infinite;
 }
+  
+  @keyframes move {
+  from {background-color: #FFEAEA;}
+  to {background-color: rgb(255, 222, 250);}
+
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
