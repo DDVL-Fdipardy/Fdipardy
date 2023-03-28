@@ -16,7 +16,6 @@
   height: 754px;
 }
 
-
 .questionsContainer {
   display: flex;
 }
@@ -34,7 +33,6 @@
   text-shadow: 6px 4px 22px  #d1ba68;
   letter-spacing: normal;
   animation: flip 5s infinite;
-  animation-delay: calc(.15s * var(--i))
 }
 
 @keyframes flip {
@@ -92,46 +90,6 @@
   margin-top: 23px;
 }
 
-@media screen and (max-width: 600px) {
-  .mainContainer{
-    height: 1048px;
-    background-size: auto;
-  }
-  .paragraph{
-    margin-right: 217px;
-    font-size: 21px;
-    margin-left: 50px;
-    margin-top: 41px;
-    
-  }
-  .title{
-    font-size: 46px;
-    margin-right: 205px;
-    margin-left: 70px;
-  }
-  .columnItems{
-    padding: 0px;
-    margin: 0px;
-    margin-right: 0px;
-  }
-  .category{
-    margin-right: 8px;
-    font-size: 20px;
-    margin-left: 9px;
-    margin-right: 0px;
-    margin-top: 10px;
-  }
-  .playerContainer{
-    padding: 6px;
-    padding-left: 0px;
-    padding-right: 20px;
-    
-    margin-right: 146px;
-    margin-left: 30px;
-    margin-top: 10px;
-  }
-  
-}
 
 
 
