@@ -50,4 +50,18 @@
     }
 }
 
+@media screen and (max-width: 600px) {
+  .box{
+    padding: 0px;
+    font-size: 19px;
+    width: 4rem;
+    height: 4rem;
+    margin-left: 1rem;
+
+    margin-right: 10px;
+    
+  }
+  
+}
+
 
