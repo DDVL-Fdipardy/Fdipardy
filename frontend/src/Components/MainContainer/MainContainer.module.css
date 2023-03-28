@@ -16,6 +16,7 @@
   height: 754px;
 }
 
+
 .questionsContainer {
   display: flex;
 }
@@ -89,6 +90,47 @@
   color: rgb(192, 217, 239);
   font-size: 39px;
   margin-top: 23px;
+}
+
+@media screen and (max-width: 600px) {
+  .mainContainer{
+    height: 1048px;
+    background-size: auto;
+  }
+  .paragraph{
+    margin-right: 217px;
+    font-size: 21px;
+    margin-left: 50px;
+    margin-top: 41px;
+    
+  }
+  .title{
+    font-size: 46px;
+    margin-right: 205px;
+    margin-left: 70px;
+  }
+  .columnItems{
+    padding: 0px;
+    margin: 0px;
+    margin-right: 0px;
+  }
+  .category{
+    margin-right: 8px;
+    font-size: 20px;
+    margin-left: 9px;
+    margin-right: 0px;
+    margin-top: 10px;
+  }
+  .playerContainer{
+    padding: 6px;
+    padding-left: 0px;
+    padding-right: 20px;
+    
+    margin-right: 146px;
+    margin-left: 30px;
+    margin-top: 10px;
+  }
+  
 }
 
 
