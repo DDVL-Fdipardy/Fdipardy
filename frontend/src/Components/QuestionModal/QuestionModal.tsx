@@ -16,7 +16,7 @@ const QuestionModal = (props: IQuestionModalProps) => {
         </div>
         <div className={styles.modalBody}>{answer}</div>
         <div className={styles.modalFooter}>
-          <button className="button" onClick={onClose}>
+          <button className={styles.modalButton} onClick={onClose}>
             Close
           </button>
         </div>
