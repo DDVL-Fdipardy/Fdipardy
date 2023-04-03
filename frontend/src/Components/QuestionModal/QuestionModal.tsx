@@ -1,8 +1,9 @@
 import { IQuestionModalProps } from "./IQuestionModalProps";
 import styles from "./QuestionModal.module.css";
+import { useEffect, useState } from "react";
 
 const QuestionModal = (props: IQuestionModalProps) => {
-  const { isModalVisible, question, answer, onClose } = props;
+  const { isModalVisible, question, inputValue, answer, onClose, handleSubmit, handleInputChange } = props;
 
   if (!isModalVisible) {
     return <></>;
@@ -14,7 +15,12 @@ const QuestionModal = (props: IQuestionModalProps) => {
         <div className={styles.modalHeader}>
           <h2 className={styles.modalTitle}>{question}</h2>
         </div>
-        <div className={styles.modalBody}>{answer}</div>
+        <div className={styles.modalBody}>
+          <input type="text" value={inputValue} onChange={(ev) => handleInputChange(ev)} />
+          <button className={styles.modalButton} onClick={() => handleSubmit()}>
+            Submit
+          </button>
+        </div>
         <div className={styles.modalFooter}>
           <button className={styles.modalButton} onClick={onClose}>
             Close

@@ -16,6 +16,8 @@ const MainContainer = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedQuestion, setSelectedQuestion] = useState<string>("");
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
+  const [inputValue, setInputValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,6 +73,31 @@ const MainContainer = () => {
     setSelectedAnswer("");
   };
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setInputValue(value);
+  };
+
+  const handleSubmit = () => {
+    const inputCopy = inputValue;
+    const unformattedAnswer = selectedAnswer;
+    inputCopy.toLowerCase();
+    unformattedAnswer.toLowerCase();
+    console.log("Input copy: ", inputCopy);
+    console.log("Answer copy: ", unformattedAnswer);
+
+    if (inputCopy === unformattedAnswer) {
+      console.log("Entered true");
+      setTimeout(() => setErrorMessage("Correct answer!"), 3000);
+      setIsModalVisible(false);
+      setSelectedQuestion("");
+      setSelectedAnswer("");
+    } else {
+      console.log("Entered false");
+      setErrorMessage("Wrong answer!");
+    }
+  };
+
   return (
     <div className={styles.mainContainer}>
       <p className={styles.paragraph}>Welcome to</p>
@@ -86,6 +113,9 @@ const MainContainer = () => {
       <div>
         <QuestionModal
           onClose={handleClose}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          inputValue={inputValue}
           isModalVisible={isModalVisible}
           answer={selectedAnswer}
           question={selectedQuestion}
