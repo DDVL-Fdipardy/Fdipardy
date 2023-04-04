@@ -95,29 +95,21 @@
   .paragraph {
     font-size: 28px;
   }
-
   .title {
     font-size: 60px;
   }
-
   .mainContainer {
-    
     height: 100vh;
   }
-
   .questionsContainer {
     padding: 0%;
-
   }
   .category{
     font-size: 1.3rem;
-
   }
-
   .playerContainer{
     margin-top: 1rem;
   }
-
 }
 
 
