@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { cloneDeep } from "lodash";
 import nextId from "react-id-generator";
 import PlayerBox from "../PlayerBox/PlayerBox";
 import QuestionBox from "../QuestionBox/QuestionBox";
@@ -16,6 +17,9 @@ const MainContainer = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedQuestion, setSelectedQuestion] = useState<string>("");
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
+  const [isValid, setIsValid] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const valueRef = useRef<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,6 +75,36 @@ const MainContainer = () => {
     setSelectedAnswer("");
   };
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    valueRef.current = event.target.value;
+  };
+
+  const handleSubmit = () => {
+    const inputCopy = cloneDeep(valueRef.current);
+    const unformattedAnswer = cloneDeep(selectedAnswer);
+    setIsSubmitting(true);
+    setTimeout(() => {
+      if (inputCopy.toLowerCase() === unformattedAnswer.toLowerCase()) {
+        setIsValid("True");
+        setTimeout(() => {
+          setIsModalVisible(false);
+          setIsValid("");
+          setSelectedQuestion("");
+          setSelectedAnswer("");
+        }, 2000);
+      } else {
+        setIsValid("False");
+        setTimeout(() => {
+          setIsModalVisible(false);
+          setIsValid("");
+          setSelectedQuestion("");
+          setSelectedAnswer("");
+        }, 2000);
+      }
+      setIsSubmitting(false);
+    }, 1000);
+  };
+
   return (
     <div className={styles.mainContainer}>
       <p className={styles.paragraph}>Welcome to</p>
@@ -86,6 +120,11 @@ const MainContainer = () => {
       <div>
         <QuestionModal
           onClose={handleClose}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isSubmitting={isSubmitting}
+          isValid={isValid}
+          valueRef={valueRef}
           isModalVisible={isModalVisible}
           answer={selectedAnswer}
           question={selectedQuestion}
