@@ -17,8 +17,8 @@ const MainContainer = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedQuestion, setSelectedQuestion] = useState<string>("");
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
-  const [inputValue, setInputValue] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [isValid, setIsValid] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const valueRef = useRef<string>("");
 
   useEffect(() => {
@@ -80,16 +80,29 @@ const MainContainer = () => {
   };
 
   const handleSubmit = () => {
-    const inputCopy = cloneDeep(inputValue);
+    const inputCopy = cloneDeep(valueRef.current);
     const unformattedAnswer = cloneDeep(selectedAnswer);
-    if (inputCopy.toLowerCase() === unformattedAnswer.toLowerCase()) {
-      setTimeout(() => setErrorMessage("Correct answer!"), 3000);
-      setIsModalVisible(false);
-      setSelectedQuestion("");
-      setSelectedAnswer("");
-    } else {
-      setErrorMessage("Wrong answer!");
-    }
+    setIsSubmitting(true);
+    setTimeout(() => {
+      if (inputCopy.toLowerCase() === unformattedAnswer.toLowerCase()) {
+        setIsValid("True");
+        setTimeout(() => {
+          setIsModalVisible(false);
+          setIsValid("");
+          setSelectedQuestion("");
+          setSelectedAnswer("");
+        }, 2000);
+      } else {
+        setIsValid("False");
+        setTimeout(() => {
+          setIsModalVisible(false);
+          setIsValid("");
+          setSelectedQuestion("");
+          setSelectedAnswer("");
+        }, 2000);
+      }
+      setIsSubmitting(false);
+    }, 1000);
   };
 
   return (
@@ -109,7 +122,8 @@ const MainContainer = () => {
           onClose={handleClose}
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
-          inputValue={inputValue}
+          isSubmitting={isSubmitting}
+          isValid={isValid}
           valueRef={valueRef}
           isModalVisible={isModalVisible}
           answer={selectedAnswer}

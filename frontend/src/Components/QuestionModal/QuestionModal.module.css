@@ -51,6 +51,12 @@
   border-color: rgb(130, 191, 244);
 }
 
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
 .modalButton {
   position: absolute;
   bottom: 10px;
@@ -65,12 +71,12 @@
   border: rgb(130, 191, 244);
   border-top-right-radius: 15px 20px;
   border-top-left-radius: 15px 20px;
-
   border-bottom-right-radius: 15px 20px;
   border-bottom-left-radius: 15px 20px;
   font-size: 13px;
   font-style: oblique;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .submitButton {
@@ -83,12 +89,17 @@
   border: rgb(130, 191, 244);
   border-top-right-radius: 15px 20px;
   border-top-left-radius: 15px 20px;
-
   border-bottom-right-radius: 15px 20px;
   border-bottom-left-radius: 15px 20px;
   font-size: 15px;
   font-style: oblique;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.modalButton,
+.submitButton:hover {
+  background-color: darkblue;
 }
 
 @keyframes move {
