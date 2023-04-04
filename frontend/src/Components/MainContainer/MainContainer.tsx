@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { cloneDeep } from "lodash";
 import nextId from "react-id-generator";
 import PlayerBox from "../PlayerBox/PlayerBox";
 import QuestionBox from "../QuestionBox/QuestionBox";
@@ -18,6 +19,7 @@ const MainContainer = () => {
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const valueRef = useRef<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,26 +76,18 @@ const MainContainer = () => {
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setInputValue(value);
+    valueRef.current = event.target.value;
   };
 
   const handleSubmit = () => {
-    const inputCopy = inputValue;
-    const unformattedAnswer = selectedAnswer;
-    inputCopy.toLowerCase();
-    unformattedAnswer.toLowerCase();
-    console.log("Input copy: ", inputCopy);
-    console.log("Answer copy: ", unformattedAnswer);
-
-    if (inputCopy === unformattedAnswer) {
-      console.log("Entered true");
+    const inputCopy = cloneDeep(inputValue);
+    const unformattedAnswer = cloneDeep(selectedAnswer);
+    if (inputCopy.toLowerCase() === unformattedAnswer.toLowerCase()) {
       setTimeout(() => setErrorMessage("Correct answer!"), 3000);
       setIsModalVisible(false);
       setSelectedQuestion("");
       setSelectedAnswer("");
     } else {
-      console.log("Entered false");
       setErrorMessage("Wrong answer!");
     }
   };
@@ -116,6 +110,7 @@ const MainContainer = () => {
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
           inputValue={inputValue}
+          valueRef={valueRef}
           isModalVisible={isModalVisible}
           answer={selectedAnswer}
           question={selectedQuestion}

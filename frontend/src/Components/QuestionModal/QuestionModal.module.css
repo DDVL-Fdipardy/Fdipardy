@@ -24,6 +24,7 @@
 }
 .modalHeader,
 .modalFooter {
+  position: relative;
   padding: 10px;
 }
 .modalTitle {
@@ -36,13 +37,49 @@
   border-top: 2px dashed rgb(130, 191, 244);
   border-bottom: 2px dashed rgb(130, 191, 244);
 }
+
+.input {
+  width: 200px;
+  font-size: 15px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: rgb(130, 191, 244);
+}
+
 .modalButton {
-  display: grid;
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  justify-content: right;
+  display: flex;
   margin: auto;
   background: linear-gradient(-45deg, #ffeaea, rgb(145, 210, 240), rgb(210, 74, 190));
   background-size: 400% 400%;
   animation: gradient 6s ease infinite;
   padding: 10px;
+  border: rgb(130, 191, 244);
+  border-top-right-radius: 15px 20px;
+  border-top-left-radius: 15px 20px;
+
+  border-bottom-right-radius: 15px 20px;
+  border-bottom-left-radius: 15px 20px;
+  font-size: 13px;
+  font-style: oblique;
+  font-weight: bold;
+}
+
+.submitButton {
+  display: grid;
+  margin: auto;
+  background: linear-gradient(-45deg, #ffeaea, rgb(145, 210, 240), rgb(210, 74, 190));
+  background-size: 400% 400%;
+  animation: gradient 6s ease infinite;
+  padding: 15px;
   border: rgb(130, 191, 244);
   border-top-right-radius: 15px 20px;
   border-top-left-radius: 15px 20px;
