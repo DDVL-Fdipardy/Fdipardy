@@ -13,9 +13,8 @@
   background-image: url("../../images/space-galaxy-background-free-vector.webp");
   background-size: cover;
   background-position: center;
-  
-  height: 60rem;
-   
+  width: 100vw;
+  height: 117vh;
 }
 
 .questionsContainer {
@@ -85,7 +84,6 @@
   align-items: center;
   vertical-align: middle;
   margin-bottom: 0px;
-  
   color: rgb(192, 217, 239);
   font-size: 39px;
   margin-top: 23px;
