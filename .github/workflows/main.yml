@@ -39,3 +39,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=DDVL-Fdipardy_Fdipardy
+        
+        
+  reactCI:
+    runs-on: ubuntu-latest
+    steps:
+     - uses: actions/checkout@v3
+
+     - name: Setup Node version 18.15.0
+       uses: actions/setup-node@v3
+       with:
+          node-version: 16.18.12
+
+     - name: Install dependencies
+       working-directory: frontend
+       run: npm install
