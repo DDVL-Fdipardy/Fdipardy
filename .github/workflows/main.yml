@@ -62,7 +62,7 @@ jobs:
         projectBaseDir: frontend
         args: >
          -Dsonar.organization=DDVL-Fdipardy
-         -Dsonar.projectKey=DDVL-Fdipardy_Fdipardy
+         -Dsonar.projectKey=ddvl-fdipardy
        env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
