@@ -10,6 +10,11 @@ import { IAnswer } from "../../Types/IAnswer";
 import { generateFullCategories } from "../../Helpers/helper";
 import QuestionModal from "../QuestionModal/QuestionModal";
 
+type Player = {
+  name: string;
+  points: number;
+};
+
 const MainContainer = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [answers, setAnswers] = useState<IAnswer[]>([]);
@@ -20,6 +25,12 @@ const MainContainer = () => {
   const [isValid, setIsValid] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const valueRef = useRef<string>("");
+  const [player1, setPlayer1] = useState<Player>({ name: "Player 1", points: 0 });
+  const [player2, setPlayer2] = useState<Player>({ name: "Player 2", points: 0 });
+  const [player3, setPlayer3] = useState<Player>({ name: "Player 3", points: 0 });
+  const [activePlayerIndex, setActivePlayerIndex] = useState<number>(0);
+  const players = [player1, player2, player3];
+  const [currentPlayer, setCurrentPlayer] = useState<string>("Player 1");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,28 +90,71 @@ const MainContainer = () => {
     valueRef.current = event.target.value;
   };
 
-  const handleSubmit = () => {
+  const updatePlayerPoints = (playerName: string, points: number) => {
+    switch (playerName) {
+      case player1.name:
+        setPlayer1((prevPlayer) => ({ ...prevPlayer, points: prevPlayer.points + points }));
+        break;
+      case player2.name:
+        setPlayer2((prevPlayer) => ({ ...prevPlayer, points: prevPlayer.points + points }));
+        break;
+      case player3.name:
+        setPlayer3((prevPlayer) => ({ ...prevPlayer, points: prevPlayer.points + points }));
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const index = Number(event.key) - 1;
+      if (index >= 0 && index < players.length) {
+        setActivePlayerIndex(index);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [players.length]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    //e.preventDefault();
+    let pointsToAdd: number;
     const inputCopy = cloneDeep(valueRef.current);
     const unformattedAnswer = cloneDeep(selectedAnswer);
     setIsSubmitting(true);
     setTimeout(() => {
       if (inputCopy.toLowerCase() === unformattedAnswer.toLowerCase()) {
         setIsValid("True");
-        setTimeout(() => {
-          setIsModalVisible(false);
-          setIsValid("");
-          setSelectedQuestion("");
-          setSelectedAnswer("");
-        }, 2000);
+        pointsToAdd = 100;
       } else {
+        pointsToAdd = 0;
         setIsValid("False");
-        setTimeout(() => {
-          setIsModalVisible(false);
-          setIsValid("");
-          setSelectedQuestion("");
-          setSelectedAnswer("");
-        }, 2000);
       }
+      updatePlayerPoints(players[activePlayerIndex].name, pointsToAdd);
+      setActivePlayerIndex((activePlayerIndex + 1) % players.length);
+      setTimeout(() => {
+        setIsModalVisible(false);
+        setIsValid("");
+        setSelectedQuestion("");
+        setSelectedAnswer("");
+        setCurrentPlayer((prevPlayer) => {
+          switch (prevPlayer) {
+            case player1.name:
+              return player2.name;
+            case player2.name:
+              return player3.name;
+            case player3.name:
+              return player1.name;
+            default:
+              return player1.name;
+          }
+        });
+      }, 2000);
       setIsSubmitting(false);
     }, 1000);
   };
@@ -109,13 +163,14 @@ const MainContainer = () => {
     <div className={styles.mainContainer}>
       <p className={styles.paragraph}>Welcome to</p>
       <h1 className={styles.title}>FDIPARDY</h1>
+      <h2>Active Player: {players[activePlayerIndex].name}</h2>
       <div className={styles.questionsContainer}>
         {fullCategories.map((category) => generateQuestionBoxColumns(category))}
       </div>
       <div className={styles.playerContainer}>
-        <PlayerBox key={"player1"} name={"Player 1"} score={100} color={"rgb(223, 255, 216)"} />
-        <PlayerBox key={"player2"} name={"Player 2"} score={100} color={"rgb(254, 222, 255)"} />
-        <PlayerBox key={"player3"} name={"Player 3"} score={100} color={"rgb(223, 255, 216)"} />
+        <PlayerBox key={"player1"} name={player1.name} score={player1.points} color={"rgb(223, 255, 216)"} />
+        <PlayerBox key={"player2"} name={player2.name} score={player2.points} color={"rgb(254, 222, 255)"} />
+        <PlayerBox key={"player3"} name={player3.name} score={player3.points} color={"rgb(223, 255, 216)"} />
       </div>
       <div>
         <QuestionModal

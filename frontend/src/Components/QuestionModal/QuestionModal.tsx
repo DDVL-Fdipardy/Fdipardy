@@ -21,7 +21,7 @@ const QuestionModal = (props: IQuestionModalProps) => {
           {isValid === "True" && <div className="input">True answer.</div>}
         </div>
         <div className={styles.modalFooter}>
-          <button className={styles.submitButton} onClick={() => handleSubmit()}>
+          <button className={styles.submitButton} onClick={(e) => handleSubmit(e)}>
             Submit
           </button>
           <button className={styles.modalButton} onClick={onClose}>
