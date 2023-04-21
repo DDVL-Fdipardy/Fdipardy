@@ -9,6 +9,7 @@ import { ICategory, IFullCategory } from "../../Types/ICategory";
 import { IAnswer } from "../../Types/IAnswer";
 import { generateFullCategories } from "../../Helpers/helper";
 import QuestionModal from "../QuestionModal/QuestionModal";
+import { IPlayerBoxProps } from "../PlayerBox/IPlayerBoxProps";
 
 type Player = {
   name: string;
@@ -25,6 +26,7 @@ const MainContainer = () => {
   const [isValid, setIsValid] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const valueRef = useRef<string>("");
+  const [questionPoints, setQuestionPoints] = useState<IPlayerBoxProps | null>(null);
   const [player1, setPlayer1] = useState<Player>({ name: "Player 1", points: 0 });
   const [player2, setPlayer2] = useState<Player>({ name: "Player 2", points: 0 });
   const [player3, setPlayer3] = useState<Player>({ name: "Player 3", points: 0 });
@@ -89,7 +91,6 @@ const MainContainer = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     valueRef.current = event.target.value;
   };
-
   const updatePlayerPoints = (playerName: string, points: number) => {
     switch (playerName) {
       case player1.name:
@@ -104,6 +105,7 @@ const MainContainer = () => {
       default:
         break;
     }
+    setCurrentPlayer(playerName);
   };
 
   useEffect(() => {
@@ -121,8 +123,7 @@ const MainContainer = () => {
     };
   }, [players.length]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    //e.preventDefault();
+  const handleSubmit = () => {
     let pointsToAdd: number;
     const inputCopy = cloneDeep(valueRef.current);
     const unformattedAnswer = cloneDeep(selectedAnswer);
@@ -132,30 +133,19 @@ const MainContainer = () => {
         setIsValid("True");
         pointsToAdd = 100;
       } else {
-        pointsToAdd = 0;
         setIsValid("False");
+        pointsToAdd = 0;
       }
       updatePlayerPoints(players[activePlayerIndex].name, pointsToAdd);
-      setActivePlayerIndex((activePlayerIndex + 1) % players.length);
+      const nextPlayerIndex = (activePlayerIndex + 1) % players.length;
+      setActivePlayerIndex(nextPlayerIndex);
+      setCurrentPlayer(players[nextPlayerIndex].name);
       setTimeout(() => {
         setIsModalVisible(false);
         setIsValid("");
         setSelectedQuestion("");
         setSelectedAnswer("");
-        setCurrentPlayer((prevPlayer) => {
-          switch (prevPlayer) {
-            case player1.name:
-              return player2.name;
-            case player2.name:
-              return player3.name;
-            case player3.name:
-              return player1.name;
-            default:
-              return player1.name;
-          }
-        });
-      }, 2000);
-      setIsSubmitting(false);
+      }, 1000);
     }, 1000);
   };
 
