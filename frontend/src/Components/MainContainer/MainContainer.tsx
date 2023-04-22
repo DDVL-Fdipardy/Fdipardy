@@ -24,14 +24,12 @@ const MainContainer = () => {
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [isValid, setIsValid] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const valueRef = useRef<string>("");
   const [player1, setPlayer1] = useState<Player>({ name: "Player 1", points: 0 });
   const [player2, setPlayer2] = useState<Player>({ name: "Player 2", points: 0 });
   const [player3, setPlayer3] = useState<Player>({ name: "Player 3", points: 0 });
   const [activePlayerIndex, setActivePlayerIndex] = useState<number>(0);
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [playerScores, setPlayerScores] = useState([0, 0, 0]);
-  const players = [player1, player2, player3];
   const [currentPlayer, setCurrentPlayer] = useState<string>("Player 1");
 
   useEffect(() => {
@@ -50,57 +48,8 @@ const MainContainer = () => {
     setFullCategories(extendedTopics);
   }, [categories, answers]);
 
-  const generateQuestionBoxColumns = (category: IFullCategory): JSX.Element => {
-    const generatedBoxes: JSX.Element[] = [
-      <div key={nextId()} className={styles.category}>
-        {category.title}
-      </div>,
-    ];
 
-    category.questions.map((question) => {
-      generatedBoxes.push(
-        <QuestionBox
-          key={question.id}
-          score={question.points}
-          question={question.title}
-          answer={question.answer}
-          onQuestionClick={handleQuestionClick}
-        />
-      );
-    });
 
-    return (
-      <div key={nextId()} className={styles.columnItems}>
-        {generatedBoxes}
-      </div>
-    );
-  };
-
-  const handlePlayerClick = (playerNum:string) => {
-    if(activeQuestion) {
-      setCurrentPlayer(playerNum);
-    }
-  };
-
-  const handleAnswer = (answer:string) => {
-    const isCorrect = answer === activeQuestion.answer;
-    const newScores = [...playerScores];
-
-    if(isCorrect) {
-      newScores[currentPlayer-1]+=1;
-      setPlayerScores(newScores);
-    } else {
-
-      if(currentPlayer === '1'){
-        setCurrentPlayer('2');
-      } else if (currentPlayer === '2'){
-        setCurrentPlayer('3');
-      } else {
-        setActiveQuestion(null);
-      }
-    }
-
-  };
 
   const handleQuestionClick = (question: string, answer: string) => {
     setIsModalVisible(true);
@@ -108,16 +57,25 @@ const MainContainer = () => {
     setSelectedAnswer(answer);
   };
 
-  const handleClose = () => {
-    setIsModalVisible(false);
-    setSelectedQuestion("");
-    setSelectedAnswer("");
-  };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    valueRef.current = event.target.value;
-  };
+  function InputTextCounter(){
+    const [val, setVal] = useState("")
 
+    function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
+      valueRef.current = event.target.value;
+
+      const data = ev.target.value.split(""); // intervall between words/create one more string 
+      console.log(data);
+      if (data.length <= 1) {
+        setVal(ev.target.value);
+      } else {
+        <button className={styles.submitButton} onClick={() => handleSubmit()} disabled={true}>Submit</button> && alert('You can only enter one word!!!');
+      }
+    }
+  }
+  
+  
+  
   const updatePlayerPoints = (playerName: string, points: number) => {
     switch (playerName) {
       case player1.name:
@@ -149,7 +107,7 @@ const MainContainer = () => {
     };
   }, [players.length]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = () => {
     //e.preventDefault();
     let pointsToAdd: number;
     const inputCopy = cloneDeep(valueRef.current);
