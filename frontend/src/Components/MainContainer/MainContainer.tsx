@@ -47,17 +47,13 @@ const MainContainer = () => {
     const extendedTopics: IFullCategory[] = generateFullCategories(categories, answers);
     setFullCategories(extendedTopics);
   }, [categories, answers]);
-
-
-
-
+  
   const handleQuestionClick = (question: string, answer: string) => {
     setIsModalVisible(true);
     setSelectedQuestion(question);
     setSelectedAnswer(answer);
   };
-
-
+  
   function InputTextCounter(){
     const [val, setVal] = useState("")
 
@@ -73,8 +69,6 @@ const MainContainer = () => {
       }
     }
   }
-  
-  
   
   const updatePlayerPoints = (playerName: string, points: number) => {
     switch (playerName) {
