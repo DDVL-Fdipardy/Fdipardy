@@ -91,10 +91,10 @@ const MainContainer = () => {
       setPlayerScores(newScores);
     } else {
 
-      if(currentPlayer === 1){
-        setCurrentPlayer(2);
-      } else if (currentPlayer === 2){
-        setCurrentPlayer(3);
+      if(currentPlayer === '1'){
+        setCurrentPlayer('2');
+      } else if (currentPlayer === '2'){
+        setCurrentPlayer('3');
       } else {
         setActiveQuestion(null);
       }
