@@ -2,6 +2,7 @@ export interface IQuestionModalProps {
   isModalVisible: boolean;
   question: string;
   answer: string;
+  isActive: true;
   valueRef: any;
   isValid: string;
   isSubmitting: boolean;
