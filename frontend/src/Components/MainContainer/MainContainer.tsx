@@ -29,6 +29,8 @@ const MainContainer = () => {
   const [player2, setPlayer2] = useState<Player>({ name: "Player 2", points: 0 });
   const [player3, setPlayer3] = useState<Player>({ name: "Player 3", points: 0 });
   const [activePlayerIndex, setActivePlayerIndex] = useState<number>(0);
+  const [activeQuestion, setActiveQuestion] = useState(null);
+  const [playerScores, setPlayerScores] = useState([0, 0, 0]);
   const players = [player1, player2, player3];
   const [currentPlayer, setCurrentPlayer] = useState<string>("Player 1");
 
@@ -72,6 +74,32 @@ const MainContainer = () => {
         {generatedBoxes}
       </div>
     );
+  };
+
+  const handlePlayerClick = (playerNum:string) => {
+    if(activeQuestion) {
+      setCurrentPlayer(playerNum);
+    }
+  };
+
+  const handleAnswer = (answer:string) => {
+    const isCorrect = answer === activeQuestion.answer;
+    const newScores = [...playerScores];
+
+    if(isCorrect) {
+      newScores[currentPlayer-1]+=1;
+      setPlayerScores(newScores);
+    } else {
+
+      if(currentPlayer === 1){
+        setCurrentPlayer(2);
+      } else if (currentPlayer === 2){
+        setCurrentPlayer(3);
+      } else {
+        setActiveQuestion(null);
+      }
+    }
+
   };
 
   const handleQuestionClick = (question: string, answer: string) => {
