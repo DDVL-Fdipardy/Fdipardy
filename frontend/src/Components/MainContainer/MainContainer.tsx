@@ -145,6 +145,18 @@ const MainContainer = () => {
     }, 1000);
   };
 
+  function generateQuestionBoxColumns(category: IFullCategory): any {
+    throw new Error("Function not implemented.");
+  }
+
+  function handleClose(): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <div className={styles.mainContainer}>
       <p className={styles.paragraph}>Welcome to</p>
