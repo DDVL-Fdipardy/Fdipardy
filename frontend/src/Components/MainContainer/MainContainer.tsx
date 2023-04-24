@@ -32,6 +32,8 @@ const MainContainer = () => {
   const [player3, setPlayer3] = useState<Player>({ name: "Player 3", points: 0 });
   const [activePlayerIndex, setActivePlayerIndex] = useState<number>(0);
   const players = [player1, player2, player3];
+  const [activeQuestion, setActiveQuestion] = useState(null);
+  const [playerScores, setPlayerScores] = useState([0, 0, 0]);
   const [currentPlayer, setCurrentPlayer] = useState<string>("Player 1");
 
   useEffect(() => {
