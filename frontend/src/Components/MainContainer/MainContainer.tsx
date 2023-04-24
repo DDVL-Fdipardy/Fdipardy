@@ -69,6 +69,32 @@ const MainContainer = () => {
       }
     }
   }
+
+  const handlePlayerClick = (playerNum:any) => {
+    // only allow player clicks if there is an active question
+    if (activeQuestion) {
+      setCurrentPlayer(playerNum);
+    }
+  };
+
+  const handleAnswer = (answer:string) => {
+    const isCorrect = answer === activeQuestion.answer;
+    const newScores = [...playerScores];
+
+    if (isCorrect) {
+      newScores[currentPlayer - 1] += 1;
+      setPlayerScores(newScores);
+    } else {
+      // if both other players answer incorrectly, switch to the next player
+      if (currentPlayer === '1') {
+        setCurrentPlayer('2');
+      } else if (currentPlayer === '2') {
+        setCurrentPlayer('3');
+      } else {
+        setActiveQuestion(null);
+      }
+    }
+  };
   
   const updatePlayerPoints = (playerName: string, points: number) => {
     switch (playerName) {
