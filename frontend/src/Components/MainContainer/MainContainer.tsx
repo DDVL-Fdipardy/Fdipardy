@@ -9,12 +9,7 @@ import { ICategory, IFullCategory } from "../../Types/ICategory";
 import { IAnswer } from "../../Types/IAnswer";
 import { generateFullCategories } from "../../Helpers/helper";
 import QuestionModal from "../QuestionModal/QuestionModal";
-import { IPlayerBoxProps } from "../PlayerBox/IPlayerBoxProps";
-
-type Player = {
-  name: string;
-  points: number;
-};
+import { Player } from "./IPlayer";
 
 const MainContainer = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -23,16 +18,16 @@ const MainContainer = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedQuestion, setSelectedQuestion] = useState<string>("");
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
+  const [selectedQuestionScore, setSelectedQuestionScore] = useState<number>(0);
   const [isValid, setIsValid] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const valueRef = useRef<string>("");
-  const [questionPoints, setQuestionPoints] = useState<IPlayerBoxProps | null>(null);
   const [player1, setPlayer1] = useState<Player>({ name: "Player 1", points: 0 });
   const [player2, setPlayer2] = useState<Player>({ name: "Player 2", points: 0 });
   const [player3, setPlayer3] = useState<Player>({ name: "Player 3", points: 0 });
   const [activePlayerIndex, setActivePlayerIndex] = useState<number>(0);
   const players = [player1, player2, player3];
-  const [currentPlayer, setCurrentPlayer] = useState<string>("Player 1");
+  const [currentPlayer, setCurrentPlayer] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,10 +71,11 @@ const MainContainer = () => {
     );
   };
 
-  const handleQuestionClick = (question: string, answer: string) => {
+  const handleQuestionClick = (question: string, answer: string, score: number) => {
     setIsModalVisible(true);
     setSelectedQuestion(question);
     setSelectedAnswer(answer);
+    setSelectedQuestionScore(score);
   };
 
   const handleClose = () => {
@@ -91,6 +87,7 @@ const MainContainer = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     valueRef.current = event.target.value;
   };
+
   const updatePlayerPoints = (playerName: string, points: number) => {
     switch (playerName) {
       case player1.name:
@@ -102,25 +99,30 @@ const MainContainer = () => {
       case player3.name:
         setPlayer3((prevPlayer) => ({ ...prevPlayer, points: prevPlayer.points + points }));
         break;
-      default:
-        break;
     }
     setCurrentPlayer(playerName);
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      const index = Number(event.key) - 1;
-      if (index >= 0 && index < players.length) {
-        setActivePlayerIndex(index);
-      }
-    };
+  const handleKeyDown = (event: KeyboardEvent) => {
+    const index = Number(event.key) - 1;
+    if (index >= 0 && index < players.length) {
+      setActivePlayerIndex(index);
+      document.removeEventListener("keydown", () => {
+        console.log("removed eventlistener");
+      });
+    }
+  };
 
+  const addKeyDownEventListener = () => {
     document.addEventListener("keydown", handleKeyDown);
+  };
 
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
+  // const removeKeyDownEventListener = () => {
+  //   document.removeEventListener("keydown", handleKeyDown);
+  // };
+
+  useEffect(() => {
+    addKeyDownEventListener();
   }, [players.length]);
 
   const handleSubmit = () => {
@@ -128,32 +130,30 @@ const MainContainer = () => {
     const inputCopy = cloneDeep(valueRef.current);
     const unformattedAnswer = cloneDeep(selectedAnswer);
     setIsSubmitting(true);
-    setTimeout(() => {
-      if (inputCopy.toLowerCase() === unformattedAnswer.toLowerCase()) {
-        setIsValid("True");
-        pointsToAdd = 100;
-      } else {
-        setIsValid("False");
-        pointsToAdd = 0;
-      }
-      updatePlayerPoints(players[activePlayerIndex].name, pointsToAdd);
-      const nextPlayerIndex = (activePlayerIndex + 1) % players.length;
-      setActivePlayerIndex(nextPlayerIndex);
-      setCurrentPlayer(players[nextPlayerIndex].name);
+    if (inputCopy.toLowerCase() === unformattedAnswer.toLowerCase()) {
+      setIsValid("True");
+      pointsToAdd = selectedQuestionScore;
       setTimeout(() => {
         setIsModalVisible(false);
         setIsValid("");
         setSelectedQuestion("");
         setSelectedAnswer("");
+        setSelectedQuestionScore(0);
       }, 1000);
-    }, 1000);
+    } else {
+      setIsValid("False");
+      pointsToAdd = 0;
+    }
+    updatePlayerPoints(players[activePlayerIndex].name, pointsToAdd);
+    const nextPlayerIndex = (activePlayerIndex + 1) % players.length;
+    setActivePlayerIndex(nextPlayerIndex);
+    setCurrentPlayer(players[nextPlayerIndex].name);
   };
 
   return (
     <div className={styles.mainContainer}>
       <p className={styles.paragraph}>Welcome to</p>
       <h1 className={styles.title}>FDIPARDY</h1>
-      <h2>Active Player: {players[activePlayerIndex].name}</h2>
       <div className={styles.questionsContainer}>
         {fullCategories.map((category) => generateQuestionBoxColumns(category))}
       </div>
@@ -168,6 +168,8 @@ const MainContainer = () => {
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
           isSubmitting={isSubmitting}
+          players={[player1, player2, player3]}
+          activePlayerIndex={activePlayerIndex}
           isValid={isValid}
           valueRef={valueRef}
           isModalVisible={isModalVisible}
