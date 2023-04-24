@@ -90,6 +90,22 @@ const MainContainer = () => {
     setSelectedAnswer("");
   };
 
+  function InputTextCounter(){
+    const [val, setVal] = useState("")
+
+    function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
+      valueRef.current = event.target.value;
+
+      const data = ev.target.value.split(""); // intervall between words/create one more string 
+      console.log(data);
+      if (data.length <= 1) {
+        setVal(ev.target.value);
+      } else {
+        <button className={styles.submitButton} onClick={() => handleSubmit()} disabled={true}>Submit</button> && alert('You can only enter one word!!!');
+      }
+    }
+  }
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     valueRef.current = event.target.value;
   };
