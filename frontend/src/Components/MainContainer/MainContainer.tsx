@@ -141,10 +141,10 @@ const MainContainer = () => {
       setActivePlayerIndex(nextPlayerIndex);
       setCurrentPlayer(players[nextPlayerIndex].name);
       setTimeout(() => {
-        setIsModalVisible(false);
-        setIsValid("");
-        setSelectedQuestion("");
-        setSelectedAnswer("");
+      setIsModalVisible(false);
+      setIsValid("");
+      setSelectedQuestion("");
+      setSelectedAnswer("");
       }, 1000);
     }, 1000);
   };
