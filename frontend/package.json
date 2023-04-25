@@ -25,7 +25,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .tsx",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.tsx' --write"
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.tsx' --write",
+    "prepare": "cd .. && husky install frontend/.husky"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +55,7 @@
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
     "prettier": "^2.8.4"
   }
 }
