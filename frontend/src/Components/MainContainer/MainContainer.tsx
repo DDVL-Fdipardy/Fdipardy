@@ -107,9 +107,6 @@ const MainContainer = () => {
     const index = Number(event.key) - 1;
     if (index >= 0 && index < players.length) {
       setActivePlayerIndex(index);
-      document.removeEventListener("keydown", () => {
-        console.log("removed eventlistener");
-      });
     }
   };
 
