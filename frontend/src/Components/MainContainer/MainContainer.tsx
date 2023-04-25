@@ -117,10 +117,6 @@ const MainContainer = () => {
     document.addEventListener("keydown", handleKeyDown);
   };
 
-  // const removeKeyDownEventListener = () => {
-  //   document.removeEventListener("keydown", handleKeyDown);
-  // };
-
   useEffect(() => {
     addKeyDownEventListener();
   }, [players.length]);
