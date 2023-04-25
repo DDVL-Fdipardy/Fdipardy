@@ -3,7 +3,18 @@ import styles from "./QuestionModal.module.css";
 import { useEffect, useRef, useState } from "react";
 
 const QuestionModal = (props: IQuestionModalProps) => {
-  const { isModalVisible, question, isValid, valueRef, answer, onClose, handleSubmit, handleInputChange } = props;
+  const {
+    isModalVisible,
+    question,
+    isValid,
+    valueRef,
+    answer,
+    players,
+    activePlayerIndex,
+    onClose,
+    handleSubmit,
+    handleInputChange,
+  } = props;
 
   if (!isModalVisible) {
     return <></>;
@@ -21,10 +32,11 @@ const QuestionModal = (props: IQuestionModalProps) => {
           {isValid === "True" && <div className="input">True answer.</div>}
         </div>
         <div className={styles.modalFooter}>
-          <button className={styles.submitButton} onClick={() => handleSubmit()}>
+          <h4>Active: {players[activePlayerIndex].name}</h4>
+          <button className={styles.submitButton} onClick={handleSubmit}>
             Submit
           </button>
-          <button className={styles.modalButton} onClick={onClose}>
+          <button className={styles.closeButton} onClick={onClose}>
             Close
           </button>
         </div>
