@@ -18,4 +18,13 @@
     <!--POPULATE ANSWER, THEMA & QUESTION TABLES-->
     <include file = "db/changelog/22032023/220320231501_populate_thema_answer_question.xml" relativeToChangelogFile="false"/>
 
+    <!--ADD NEW COLUMN IN ANSWER & QUESTION TABLE-->
+    <include file = "db/changelog/22032023/2201100832_create new columns.xml" relativeToChangelogFile="false"/>
+
+    <!--UPDATE DATA IN ANSWER & QUESTION TABLE-->
+    <include file = "db/changelog/22032023/100420230841_update_data_answer_question.xml" relativeToChangelogFile="false"/>
+
+    <!--DROP NEWLY CREATED COLUMNS IN ANSWER & QUESTION TABLE -->
+    <include file = "db/changelog/100420230906/100420230907_drop_unused_columns.xml" relativeToChangelogFile="false"/>
+
     </databaseChangeLog>

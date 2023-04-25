@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+
+    <!--POPULATE ANSWER TABLE-->
+    <changeSet id="populate_table_answer" author="dsimeonova">
+        <loadUpdateData  file="db/changelog/population/newAnswers.csv"
+                         onlyUpdate="true"
+                         primaryKey="id"
+                         schemaName="public"
+                         separator=";"
+                         tableName="answer">
+            <column  name="id" type="bigint"/>
+            <column  name="title" type="varchar(255)"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <!--POPULATE QUESTION TABLE-->
+    <changeSet id="populate_table_question" author="dsimeonova">
+        <loadUpdateData  file="db/changelog/population/newQuestions.csv"
+                         onlyUpdate="true"
+                         primaryKey="id"
+                         schemaName="public"
+                         separator=";"
+                         tableName="question">
+            <column name="id" type="bigint"/>
+            <column name="title" type="varchar(255)"/>
+            <column name="points" type="varchar(255)"/>
+            <column name="thema_id" type="bigint"/>
+            <column name="answer_id" type="bigint"/>
+        </loadUpdateData>
+    </changeSet>
+
+
+
+</databaseChangeLog>
