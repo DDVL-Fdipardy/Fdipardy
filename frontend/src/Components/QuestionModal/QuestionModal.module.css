@@ -26,7 +26,11 @@
 .modalFooter {
   position: relative;
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
 .modalTitle {
   margin: 0;
   font-family: "Shantell Sans", cursive;
@@ -59,9 +63,9 @@
   margin-top: 5px;
 }
 
-.modalButton {
+.closeButton {
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
   right: 5px;
   justify-content: right;
   display: flex;
@@ -83,6 +87,7 @@
 
 .submitButton {
   display: grid;
+  width: 100px;
   margin: auto;
   background: linear-gradient(-45deg, #ffeaea, rgb(145, 210, 240), rgb(210, 74, 190));
   background-size: 400% 400%;
