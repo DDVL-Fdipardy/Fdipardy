@@ -12,7 +12,7 @@ import java.util.List;
 public interface AnswerResource {
 
     @GetMapping("/answers/{id}")
-    Answer getById(Long id);
+    Answer getAnswerById(Long id);
 
     @GetMapping("/answers")
     List<Answer> getAll();

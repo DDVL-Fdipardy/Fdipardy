@@ -14,3 +14,9 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+
+info:
+  application:
+    name: fdipardy
+    version: 1.0.0
+    description: This is a game developed for University Course - Clean Code Development

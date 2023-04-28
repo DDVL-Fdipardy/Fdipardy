@@ -23,11 +23,12 @@ public class ThemaServiceImpl implements ThemaService {
             Optional<Thema> thema = themaRepository.findById(id);
             return thema.orElseThrow(()-> new HttpServerErrorException(HttpStatus.NO_CONTENT));
         }
-        return null;
+        throw new HttpServerErrorException(HttpStatus.NO_CONTENT);
     }
 
     @Override
     public List<Thema> getAll() {
-        return themaRepository.findAll();
+        List<Thema> themas = themaRepository.findAll();
+        return themas;
     }
 }
