@@ -11,9 +11,9 @@ import java.util.List;
 @RequestMapping("/fdipardy/api")
 public interface QuestionResource {
 
-    @GetMapping("/questions")
-    List<Question> getAllQuestions();
-
     @GetMapping("/question/{id}")
     Question getQuestionById(@PathVariable Long id);
+
+    @GetMapping("/questions")
+    List<Question> getAllQuestions();
 }

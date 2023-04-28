@@ -20,7 +20,7 @@ public class AnswerResourceImpl implements AnswerResource {
     }
 
     @Override
-    public Answer getById(@PathVariable Long id) {
+    public Answer getAnswerById(@PathVariable Long id) {
         return answerService.getById(id);
     }
 

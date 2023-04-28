@@ -18,16 +18,17 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionRepository questionRepository;
 
     @Override
-    public List<Question> getAll() {
-        return questionRepository.findAll();
-    }
-
-    @Override
     public Question getById(Long id) {
         if(id != null && questionRepository.existsById(id)){
             Optional<Question> question = questionRepository.findById(id);
             return question.orElseThrow(() -> new HttpServerErrorException(HttpStatus.NO_CONTENT));
         }
-        throw  new HttpServerErrorException(HttpStatus.NO_CONTENT);
+        throw new HttpServerErrorException(HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    public List<Question> getAll() {
+        List<Question> questions = questionRepository.findAll();
+        return questions;
     }
 }
