@@ -1,40 +1,46 @@
-import { cloneDeep } from "lodash";
 import { IQuestionModalProps } from "./IQuestionModalProps";
 import styles from "./QuestionModal.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const QuestionModal = (props: IQuestionModalProps) => {
-  const { isModalVisible, question, isPlayerAnswerValid, onClose, handleSubmit } = props;
+  const {
+    isModalVisible,
+    question,
+    answer,
+    activePlayerIndex,
+    activePlayersLength,
+    onClose,
+    addListener,
+    resetActivePlayer,
+  } = props;
   const [inputValue, setInputValue] = useState<string>("");
-  const [playerIndexes, setPlatyerIndexes] = useState<number[]>([]);
-  const [activePlayerIndex, setActivePlayerIndex] = useState<number | null>(null);
+  const [isPlayerAnswerValid, setIsPlayerAnswerValid] = useState("");
 
-  useEffect(() => {
-    const playerIdxs = [1, 2, 3];
-    setPlatyerIndexes(playerIdxs);
-    addKeyDownEventListener();
-  }, []);
-
-  const handleKeyDown = (event: KeyboardEvent) => {
-    const pressedKeyAsNumber = Number(event.key);
-    if (playerIndexes.includes(pressedKeyAsNumber)) {
-      setActivePlayerIndex(pressedKeyAsNumber);
-      // const idxInPlayerArray = playerIndexes.indexOf(pressedKeyAsNumber);
-      // const newIndexes = cloneDeep(playerIndexes);
-      // newIndexes.splice(idxInPlayerArray, 1);
-      // setPlatyerIndexes(newIndexes);
-      // console.log("Active index: ", pressedKeyAsNumber);
-      //console.log("Player indexesa after splice: ", newIndexes);
+  const handleSubmit = () => {
+    if (inputValue.toLowerCase() === answer.toLowerCase()) {
+      setIsPlayerAnswerValid("True");
+      setTimeout(() => {
+        onClose();
+      }, 1000);
+    } else {
+      setIsPlayerAnswerValid("False");
+      addListener();
+      if (activePlayersLength === 0) {
+        setTimeout(() => {
+          onClose();
+        }, 1000);
+      }
     }
+    setTimeout(() => {
+      modalCleanUp();
+    }, 2000);
   };
 
-  const addKeyDownEventListener = () => {
-    document.addEventListener("keydown", handleKeyDown);
+  const modalCleanUp = () => {
+    setIsPlayerAnswerValid("");
+    setInputValue("");
+    resetActivePlayer();
   };
-
-  // const removeKeyDownEventListener = () => {
-  //   document.removeEventListener("keydown", handleKeyDown);
-  // };
 
   if (!isModalVisible) {
     return <></>;
@@ -58,7 +64,7 @@ const QuestionModal = (props: IQuestionModalProps) => {
         </div>
         <div className={styles.modalFooter}>
           <h4>Active player: Player {activePlayerIndex}</h4>
-          <button className={styles.submitButton} onClick={() => handleSubmit(inputValue)}>
+          <button className={styles.submitButton} onClick={handleSubmit}>
             Submit
           </button>
           <button className={styles.closeButton} onClick={onClose}>

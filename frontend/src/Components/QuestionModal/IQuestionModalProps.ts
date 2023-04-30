@@ -2,7 +2,9 @@ export interface IQuestionModalProps {
   isModalVisible: boolean;
   question: string;
   answer: string;
-  isPlayerAnswerValid: string;
+  activePlayerIndex: number | null;
+  activePlayersLength: number;
   onClose(): void;
-  handleSubmit: (playerAnswer: string) => void;
+  addListener: () => void;
+  resetActivePlayer: () => void;
 }
