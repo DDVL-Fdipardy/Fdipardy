@@ -6,7 +6,7 @@
   border-block-end-width: 7px;
   border-block-end-color: rgb(130, 191, 244);
   border-block-start-color: rgb(130, 191, 244);
-  
+
   width: 5rem;
   height: 3rem;
   cursor: pointer;
@@ -24,28 +24,36 @@
 
   border-bottom-right-radius: 15px 20px;
   border-bottom-left-radius: 15px 20px;
-  
-  background: linear-gradient(-45deg, #FFEAEA, rgb(145, 210, 240), rgb(210, 74, 190));
+
+  background: linear-gradient(-45deg, #ffeaea, rgb(145, 210, 240), rgb(210, 74, 190));
   background-size: 400% 400%;
   animation: gradient 6s ease infinite;
 }
-  
-  @keyframes move {
-  from {background-color: #FFEAEA;}
-  to {background-color: rgb(255, 222, 250);}
 
+.disabled {
+  cursor: not-allowed;
+  background: linear-gradient(-45deg, #ffeaea, rgb(19, 67, 88), rgb(87, 16, 76));
+}
+
+@keyframes move {
+  from {
+    background-color: #ffeaea;
+  }
+  to {
+    background-color: rgb(255, 222, 250);
+  }
 }
 
 @keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @media screen and (max-width: 1280px) and (max-height: 720px) {
@@ -54,5 +62,3 @@
     font-size: 21px;
   }
 }
-
-

@@ -16,6 +16,7 @@ const MainContainer = () => {
   const [player1, setPlayer1] = useState<Player>({ name: "Player 1", points: 0 });
   const [player2, setPlayer2] = useState<Player>({ name: "Player 2", points: 0 });
   const [player3, setPlayer3] = useState<Player>({ name: "Player 3", points: 0 });
+  const [questions, setQuestions] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,9 +32,12 @@ const MainContainer = () => {
   useEffect(() => {
     const extendedTopics: IFullCategory[] = generateFullCategories(categories, answers);
     setFullCategories(extendedTopics);
+    const allQuestions = fullCategories.map((category) => generateQuestionBoxColumns(category));
+    setQuestions(allQuestions);
   }, [categories, answers]);
 
-  const handlePointsDistribution = (playerIdx: number | null, points: number) => {
+  const handlePointsDistribution = (playerIdx: number | null, points: number): boolean => {
+    console.log("Vlez");
     switch (playerIdx) {
       case 1:
         setPlayer1({ ...player1, points: player1.points + points });
@@ -47,6 +51,8 @@ const MainContainer = () => {
       default:
         break;
     }
+
+    return true;
   };
 
   const generateQuestionBoxColumns = (category: IFullCategory): JSX.Element => {
@@ -79,9 +85,7 @@ const MainContainer = () => {
     <div className={styles.mainContainer}>
       <p className={styles.paragraph}>Welcome to</p>
       <h1 className={styles.title}>FDIPARDY</h1>
-      <div className={styles.questionsContainer}>
-        {fullCategories.map((category) => generateQuestionBoxColumns(category))}
-      </div>
+      <div className={styles.questionsContainer}>{questions}</div>
       <div className={styles.playerContainer}>
         <PlayerBox key={"player1"} name={player1.name} score={player1.points} color={"rgb(223, 255, 216)"} />
         <PlayerBox key={"player2"} name={player2.name} score={player2.points} color={"rgb(254, 222, 255)"} />
