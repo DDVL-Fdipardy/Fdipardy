@@ -15,6 +15,7 @@ const QuestionModal = (props: IQuestionModalProps) => {
   } = props;
   const [inputValue, setInputValue] = useState<string>("");
   const [isPlayerAnswerValid, setIsPlayerAnswerValid] = useState("");
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(false);
 
   const handleSubmit = () => {
     if (inputValue.toLowerCase() === answer.toLowerCase()) {
@@ -42,6 +43,16 @@ const QuestionModal = (props: IQuestionModalProps) => {
     resetActivePlayer();
   };
 
+  const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = ev.target.value;
+    setInputValue(newValue);
+    if (newValue.includes(" ")) {
+      setIsSubmitDisabled(true);
+    } else {
+      setIsSubmitDisabled(false);
+    }
+  };
+
   if (!isModalVisible) {
     return <></>;
   }
@@ -53,18 +64,13 @@ const QuestionModal = (props: IQuestionModalProps) => {
           <h2 className={styles.modalTitle}>{question}</h2>
         </div>
         <div className={styles.modalBody}>
-          <input
-            type="text"
-            placeholder="Enter answer here"
-            value={inputValue}
-            onChange={(ev) => setInputValue(ev.target.value)}
-          />
+          <input type="text" placeholder="Enter answer here" value={inputValue} onChange={(ev) => handleChange(ev)} />
           {isPlayerAnswerValid === "False" && <div className="error">Wrong answer.</div>}
           {isPlayerAnswerValid === "True" && <div className="input">True answer.</div>}
         </div>
         <div className={styles.modalFooter}>
           <h4>Active player: Player {activePlayerIndex}</h4>
-          <button className={styles.submitButton} onClick={handleSubmit}>
+          <button className={styles.submitButton} onClick={handleSubmit} disabled={isSubmitDisabled}>
             Submit
           </button>
           <button className={styles.closeButton} onClick={onClose}>
