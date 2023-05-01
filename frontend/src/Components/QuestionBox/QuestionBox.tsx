@@ -17,10 +17,14 @@ const QuestionBox = (props: IQuestionBoxProps) => {
     addKeyDownEventListener();
   };
 
-  const handleClose = () => {
+  const handleClose = (isFromFalse: boolean) => {
+    if (isFromFalse) {
+      onPointsDistribution(null, score);
+    } else {
+      onPointsDistribution(activePlayerIndex, score);
+    }
     setIsModalVisible(false);
     setIsDisabled(true);
-    onPointsDistribution(activePlayerIndex, score);
     setPlayerIndexes([1, 2, 3]);
     setActivePlayerIndex(null);
     removeKeyDownEventListener();
@@ -50,7 +54,6 @@ const QuestionBox = (props: IQuestionBoxProps) => {
     setActivePlayerIndex(null);
   };
 
-  console.log("Question ", question);
   return (
     <>
       <div className={isDisabled ? `${styles.box} ${styles.disabled}` : styles.box} onClick={handleClick}>

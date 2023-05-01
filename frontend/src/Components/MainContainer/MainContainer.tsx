@@ -8,14 +8,15 @@ import { ICategory, IFullCategory } from "../../Types/ICategory";
 import { IAnswer } from "../../Types/IAnswer";
 import { generateFullCategories } from "../../Helpers/helper";
 import { Player } from "./IPlayer";
+import { cloneDeep } from "lodash";
 
 const MainContainer = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [answers, setAnswers] = useState<IAnswer[]>([]);
   const [fullCategories, setFullCategories] = useState<IFullCategory[]>([]);
-  const [player1, setPlayer1] = useState<Player>({ name: "Player 1", points: 0 });
-  const [player2, setPlayer2] = useState<Player>({ name: "Player 2", points: 0 });
-  const [player3, setPlayer3] = useState<Player>({ name: "Player 3", points: 0 });
+  const [player1, setPlayer1] = useState<number>(0);
+  const [player2, setPlayer2] = useState<number>(0);
+  const [player3, setPlayer3] = useState<number>(0);
   const [questions, setQuestions] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
@@ -37,19 +38,13 @@ const MainContainer = () => {
   }, [categories, answers]);
 
   const handlePointsDistribution = (playerIdx: number | null, points: number) => {
-    console.log("Vlez");
-    switch (playerIdx) {
-      case 1:
-        setPlayer1({ ...player1, points: player1.points + points });
-        break;
-      case 2:
-        setPlayer2({ ...player2, points: player2.points + points });
-        break;
-      case 3:
-        setPlayer3({ ...player3, points: player3.points + points });
-        break;
-      default:
-        break;
+    console.log(playerIdx);
+    if (playerIdx === 1) {
+      setPlayer1((prevPlayer1) => prevPlayer1 + points);
+    } else if (playerIdx === 2) {
+      setPlayer2((prevPlayer2) => prevPlayer2 + points);
+    } else if (playerIdx === 3) {
+      setPlayer3((prevPlayer3) => prevPlayer3 + points);
     }
   };
 
@@ -85,9 +80,9 @@ const MainContainer = () => {
       <h1 className={styles.title}>FDIPARDY</h1>
       <div className={styles.questionsContainer}>{questions}</div>
       <div className={styles.playerContainer}>
-        <PlayerBox key={"player1"} name={player1.name} score={player1.points} color={"rgb(223, 255, 216)"} />
-        <PlayerBox key={"player2"} name={player2.name} score={player2.points} color={"rgb(254, 222, 255)"} />
-        <PlayerBox key={"player3"} name={player3.name} score={player3.points} color={"rgb(223, 255, 216)"} />
+        <PlayerBox key={"player1"} name={"Player 1"} score={player1} color={"rgb(223, 255, 216)"} />
+        <PlayerBox key={"player2"} name={"Player 2"} score={player2} color={"rgb(254, 222, 255)"} />
+        <PlayerBox key={"player3"} name={"Player 3"} score={player3} color={"rgb(223, 255, 216)"} />
       </div>
     </div>
   );

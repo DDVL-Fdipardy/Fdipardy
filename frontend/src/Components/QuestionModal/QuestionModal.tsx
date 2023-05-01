@@ -20,16 +20,14 @@ const QuestionModal = (props: IQuestionModalProps) => {
     if (inputValue.toLowerCase() === answer.toLowerCase()) {
       setIsPlayerAnswerValid("True");
       setTimeout(() => {
-        onClose();
+        onClose(false);
       }, 1000);
     } else {
       setIsPlayerAnswerValid("False");
       addListener();
       if (activePlayersLength === 0) {
-        setTimeout(() => {
-          resetActivePlayer(); //avoid race condition with cleanup
-          onClose();
-        }, 1000);
+        onClose(true);
+        return;
       }
     }
     setTimeout(() => {
@@ -68,9 +66,6 @@ const QuestionModal = (props: IQuestionModalProps) => {
           <button className={styles.submitButton} onClick={handleSubmit}>
             Submit
           </button>
-          {/* <button className={styles.closeButton} onClick={onClose}>
-            Close
-          </button> */}
         </div>
       </div>
     </div>
