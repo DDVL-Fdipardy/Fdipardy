@@ -33,6 +33,22 @@ const MainContainer = () => {
     setFullCategories(extendedTopics);
   }, [categories, answers]);
 
+  const handlePointsDistribution = (playerIdx: number | null, points: number) => {
+    switch (playerIdx) {
+      case 1:
+        setPlayer1({ ...player1, points: player1.points + points });
+        break;
+      case 2:
+        setPlayer2({ ...player2, points: player2.points + points });
+        break;
+      case 3:
+        setPlayer3({ ...player3, points: player3.points + points });
+        break;
+      default:
+        break;
+    }
+  };
+
   const generateQuestionBoxColumns = (category: IFullCategory): JSX.Element => {
     const generatedBoxes: JSX.Element[] = [
       <div key={nextId()} className={styles.category}>
@@ -42,7 +58,13 @@ const MainContainer = () => {
 
     category.questions.forEach((question) => {
       generatedBoxes.push(
-        <QuestionBox key={question.id} score={question.points} question={question.title} answer={question.answer} />
+        <QuestionBox
+          key={question.id}
+          score={question.points}
+          question={question.title}
+          answer={question.answer}
+          onPointsDistribution={handlePointsDistribution}
+        />
       );
     });
 

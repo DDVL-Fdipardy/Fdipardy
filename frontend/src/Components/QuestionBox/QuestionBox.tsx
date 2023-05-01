@@ -5,7 +5,7 @@ import QuestionModal from "../QuestionModal/QuestionModal";
 import { cloneDeep } from "lodash";
 
 const QuestionBox = (props: IQuestionBoxProps) => {
-  const { score, question, answer } = props;
+  const { score, question, answer, onPointsDistribution } = props;
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [playerIndexes, setPlayerIndexes] = useState<number[]>([1, 2, 3]);
   const [activePlayerIndex, setActivePlayerIndex] = useState<number | null>(null);
@@ -17,6 +17,7 @@ const QuestionBox = (props: IQuestionBoxProps) => {
 
   const handleClose = () => {
     setIsModalVisible(false);
+    onPointsDistribution(activePlayerIndex, score);
     setPlayerIndexes([1, 2, 3]);
     setActivePlayerIndex(null);
     removeKeyDownEventListener();

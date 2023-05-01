@@ -27,6 +27,7 @@ const QuestionModal = (props: IQuestionModalProps) => {
       addListener();
       if (activePlayersLength === 0) {
         setTimeout(() => {
+          resetActivePlayer(); //avoid race condition with cleanup
           onClose();
         }, 1000);
       }
@@ -67,9 +68,9 @@ const QuestionModal = (props: IQuestionModalProps) => {
           <button className={styles.submitButton} onClick={handleSubmit}>
             Submit
           </button>
-          <button className={styles.closeButton} onClick={onClose}>
+          {/* <button className={styles.closeButton} onClick={onClose}>
             Close
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
