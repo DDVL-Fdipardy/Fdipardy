@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import { cloneDeep } from "lodash";
+import { useEffect, useState } from "react";
 import nextId from "react-id-generator";
 import PlayerBox from "../PlayerBox/PlayerBox";
 import QuestionBox from "../QuestionBox/QuestionBox";
@@ -8,26 +7,15 @@ import { httpService } from "../../Services/httpService";
 import { ICategory, IFullCategory } from "../../Types/ICategory";
 import { IAnswer } from "../../Types/IAnswer";
 import { generateFullCategories } from "../../Helpers/helper";
-import QuestionModal from "../QuestionModal/QuestionModal";
 import { Player } from "./IPlayer";
 
 const MainContainer = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [answers, setAnswers] = useState<IAnswer[]>([]);
   const [fullCategories, setFullCategories] = useState<IFullCategory[]>([]);
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [selectedQuestion, setSelectedQuestion] = useState<string>("");
-  const [selectedAnswer, setSelectedAnswer] = useState<string>("");
-  const [selectedQuestionScore, setSelectedQuestionScore] = useState<number>(0);
-  const [isValid, setIsValid] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const valueRef = useRef<string>("");
   const [player1, setPlayer1] = useState<Player>({ name: "Player 1", points: 0 });
   const [player2, setPlayer2] = useState<Player>({ name: "Player 2", points: 0 });
   const [player3, setPlayer3] = useState<Player>({ name: "Player 3", points: 0 });
-  const [activePlayerIndex, setActivePlayerIndex] = useState<number>(0);
-  const players = [player1, player2, player3];
-  const [currentPlayer, setCurrentPlayer] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,15 +40,9 @@ const MainContainer = () => {
       </div>,
     ];
 
-    category.questions.map((question) => {
+    category.questions.forEach((question) => {
       generatedBoxes.push(
-        <QuestionBox
-          key={question.id}
-          score={question.points}
-          question={question.title}
-          answer={question.answer}
-          onQuestionClick={handleQuestionClick}
-        />
+        <QuestionBox key={question.id} score={question.points} question={question.title} answer={question.answer} />
       );
     });
 
@@ -69,78 +51,6 @@ const MainContainer = () => {
         {generatedBoxes}
       </div>
     );
-  };
-
-  const handleQuestionClick = (question: string, answer: string, score: number) => {
-    setIsModalVisible(true);
-    setSelectedQuestion(question);
-    setSelectedAnswer(answer);
-    setSelectedQuestionScore(score);
-  };
-
-  const handleClose = () => {
-    setIsModalVisible(false);
-    setSelectedQuestion("");
-    setSelectedAnswer("");
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    valueRef.current = event.target.value;
-  };
-
-  const updatePlayerPoints = (playerName: string, points: number) => {
-    switch (playerName) {
-      case player1.name:
-        setPlayer1((prevPlayer) => ({ ...prevPlayer, points: prevPlayer.points + points }));
-        break;
-      case player2.name:
-        setPlayer2((prevPlayer) => ({ ...prevPlayer, points: prevPlayer.points + points }));
-        break;
-      case player3.name:
-        setPlayer3((prevPlayer) => ({ ...prevPlayer, points: prevPlayer.points + points }));
-        break;
-    }
-    setCurrentPlayer(playerName);
-  };
-
-  const handleKeyDown = (event: KeyboardEvent) => {
-    const index = Number(event.key) - 1;
-    if (index >= 0 && index < players.length) {
-      setActivePlayerIndex(index);
-    }
-  };
-
-  const addKeyDownEventListener = () => {
-    document.addEventListener("keydown", handleKeyDown);
-  };
-
-  useEffect(() => {
-    addKeyDownEventListener();
-  }, [players.length]);
-
-  const handleSubmit = () => {
-    let pointsToAdd: number;
-    const inputCopy = cloneDeep(valueRef.current);
-    const unformattedAnswer = cloneDeep(selectedAnswer);
-    setIsSubmitting(true);
-    if (inputCopy.toLowerCase() === unformattedAnswer.toLowerCase()) {
-      setIsValid("True");
-      pointsToAdd = selectedQuestionScore;
-      setTimeout(() => {
-        setIsModalVisible(false);
-        setIsValid("");
-        setSelectedQuestion("");
-        setSelectedAnswer("");
-        setSelectedQuestionScore(0);
-      }, 1000);
-    } else {
-      setIsValid("False");
-      pointsToAdd = 0;
-    }
-    updatePlayerPoints(players[activePlayerIndex].name, pointsToAdd);
-    const nextPlayerIndex = (activePlayerIndex + 1) % players.length;
-    setActivePlayerIndex(nextPlayerIndex);
-    setCurrentPlayer(players[nextPlayerIndex].name);
   };
 
   return (
@@ -154,21 +64,6 @@ const MainContainer = () => {
         <PlayerBox key={"player1"} name={player1.name} score={player1.points} color={"rgb(223, 255, 216)"} />
         <PlayerBox key={"player2"} name={player2.name} score={player2.points} color={"rgb(254, 222, 255)"} />
         <PlayerBox key={"player3"} name={player3.name} score={player3.points} color={"rgb(223, 255, 216)"} />
-      </div>
-      <div>
-        <QuestionModal
-          onClose={handleClose}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          isSubmitting={isSubmitting}
-          players={[player1, player2, player3]}
-          activePlayerIndex={activePlayerIndex}
-          isValid={isValid}
-          valueRef={valueRef}
-          isModalVisible={isModalVisible}
-          answer={selectedAnswer}
-          question={selectedQuestion}
-        />
       </div>
     </div>
   );
