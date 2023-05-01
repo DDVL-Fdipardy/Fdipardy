@@ -18,9 +18,9 @@ const QuestionBox = (props: IQuestionBoxProps) => {
   };
 
   const handleClose = () => {
-    console.log("on Close");
     setIsModalVisible(false);
-    setIsDisabled(onPointsDistribution(activePlayerIndex, score));
+    setIsDisabled(true);
+    onPointsDistribution(activePlayerIndex, score);
     setPlayerIndexes([1, 2, 3]);
     setActivePlayerIndex(null);
     removeKeyDownEventListener();

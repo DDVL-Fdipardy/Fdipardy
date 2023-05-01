@@ -36,7 +36,7 @@ const MainContainer = () => {
     setQuestions(allQuestions);
   }, [categories, answers]);
 
-  const handlePointsDistribution = (playerIdx: number | null, points: number): boolean => {
+  const handlePointsDistribution = (playerIdx: number | null, points: number) => {
     console.log("Vlez");
     switch (playerIdx) {
       case 1:
@@ -51,8 +51,6 @@ const MainContainer = () => {
       default:
         break;
     }
-
-    return true;
   };
 
   const generateQuestionBoxColumns = (category: IFullCategory): JSX.Element => {
