@@ -53,6 +53,28 @@ const QuestionModal = (props: IQuestionModalProps) => {
     }
   };
 
+  const handleDisplayMessage = () => {
+    let message = "";
+
+    switch (isPlayerAnswerValid) {
+      case "True":
+        message = "True answer!";
+        break;
+      case "False":
+        message = "Wrong answer!";
+        break;
+      default:
+        message = "";
+        break;
+    }
+
+    if (isSubmitDisabled) {
+      message = "Answer must consist of one word only!";
+    }
+
+    return <div className="error">{message}</div>;
+  };
+
   if (!isModalVisible) {
     return <></>;
   }
@@ -65,9 +87,7 @@ const QuestionModal = (props: IQuestionModalProps) => {
         </div>
         <div className={styles.modalBody}>
           <input type="text" placeholder="Enter answer here" value={inputValue} onChange={(ev) => handleChange(ev)} />
-          {isPlayerAnswerValid === "False" && <div className="error">Wrong answer.</div>}
-          {isPlayerAnswerValid === "True" && <div className="input">True answer.</div>}
-          {isSubmitDisabled && <div className="error">Answer must consist of one word only!</div>}
+          {handleDisplayMessage()}
         </div>
         <div className={styles.modalFooter}>
           <h4>Active player: Player {activePlayerIndex}</h4>
