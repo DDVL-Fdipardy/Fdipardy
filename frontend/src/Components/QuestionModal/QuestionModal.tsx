@@ -67,6 +67,7 @@ const QuestionModal = (props: IQuestionModalProps) => {
           <input type="text" placeholder="Enter answer here" value={inputValue} onChange={(ev) => handleChange(ev)} />
           {isPlayerAnswerValid === "False" && <div className="error">Wrong answer.</div>}
           {isPlayerAnswerValid === "True" && <div className="input">True answer.</div>}
+          {isSubmitDisabled && <div className="error">Answer must consist of one word only!</div>}
         </div>
         <div className={styles.modalFooter}>
           <h4>Active player: Player {activePlayerIndex}</h4>
