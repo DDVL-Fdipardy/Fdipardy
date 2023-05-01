@@ -1,3 +1,4 @@
+import { checkWhitespaces } from "../../Helpers/helper";
 import { IQuestionModalProps } from "./IQuestionModalProps";
 import styles from "./QuestionModal.module.css";
 import { useState } from "react";
@@ -43,14 +44,9 @@ const QuestionModal = (props: IQuestionModalProps) => {
     resetActivePlayer();
   };
 
-  const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = ev.target.value;
+  const handleChange = (newValue: string) => {
     setInputValue(newValue);
-    if (newValue.includes(" ")) {
-      setIsSubmitDisabled(true);
-    } else {
-      setIsSubmitDisabled(false);
-    }
+    setIsSubmitDisabled(checkWhitespaces(newValue));
   };
 
   const handleDisplayMessage = () => {
@@ -86,7 +82,12 @@ const QuestionModal = (props: IQuestionModalProps) => {
           <h2 className={styles.modalTitle}>{question}</h2>
         </div>
         <div className={styles.modalBody}>
-          <input type="text" placeholder="Enter answer here" value={inputValue} onChange={(ev) => handleChange(ev)} />
+          <input
+            type="text"
+            placeholder="Enter answer here"
+            value={inputValue}
+            onChange={(ev) => handleChange(ev.target.value)}
+          />
           {handleDisplayMessage()}
         </div>
         <div className={styles.modalFooter}>
