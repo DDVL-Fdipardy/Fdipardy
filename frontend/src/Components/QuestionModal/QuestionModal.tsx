@@ -59,7 +59,6 @@ const QuestionModal = (props: IQuestionModalProps) => {
         message = "Wrong answer!";
         break;
       default:
-        message = "";
         break;
     }
 
