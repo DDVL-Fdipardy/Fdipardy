@@ -1,3 +1,4 @@
+import { checkWhitespaces } from "../../Helpers/helper";
 import { IQuestionModalProps } from "./IQuestionModalProps";
 import styles from "./QuestionModal.module.css";
 import { useState } from "react";
@@ -15,6 +16,7 @@ const QuestionModal = (props: IQuestionModalProps) => {
   } = props;
   const [inputValue, setInputValue] = useState<string>("");
   const [isPlayerAnswerValid, setIsPlayerAnswerValid] = useState("");
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(false);
 
   const handleSubmit = () => {
     if (inputValue.toLowerCase() === answer.toLowerCase()) {
@@ -42,6 +44,33 @@ const QuestionModal = (props: IQuestionModalProps) => {
     resetActivePlayer();
   };
 
+  const handleChange = (newValue: string) => {
+    setInputValue(newValue);
+    setIsSubmitDisabled(checkWhitespaces(newValue));
+  };
+
+  const handleDisplayMessage = () => {
+    let message = "";
+
+    switch (isPlayerAnswerValid) {
+      case "True":
+        message = "True answer!";
+        break;
+      case "False":
+        message = "Wrong answer!";
+        break;
+      default:
+        message = "";
+        break;
+    }
+
+    if (isSubmitDisabled) {
+      message = "Answer must consist of one word only!";
+    }
+
+    return <div className="error">{message}</div>;
+  };
+
   if (!isModalVisible) {
     return <></>;
   }
@@ -57,14 +86,13 @@ const QuestionModal = (props: IQuestionModalProps) => {
             type="text"
             placeholder="Enter answer here"
             value={inputValue}
-            onChange={(ev) => setInputValue(ev.target.value)}
+            onChange={(ev) => handleChange(ev.target.value)}
           />
-          {isPlayerAnswerValid === "False" && <div className="error">Wrong answer.</div>}
-          {isPlayerAnswerValid === "True" && <div className="input">True answer.</div>}
+          {handleDisplayMessage()}
         </div>
         <div className={styles.modalFooter}>
           <h4>Active player: Player {activePlayerIndex}</h4>
-          <button className={styles.submitButton} onClick={handleSubmit}>
+          <button className={styles.submitButton} onClick={handleSubmit} disabled={isSubmitDisabled}>
             Submit
           </button>
           <button className={styles.closeButton} onClick={onClose}>
