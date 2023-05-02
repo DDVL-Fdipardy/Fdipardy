@@ -35,7 +35,7 @@
   margin: 0;
   font-family: "Shantell Sans", cursive;
   color: rgb(62, 84, 172);
-  text-shadow: 2px 2px 20px  rgb(105, 102, 240);
+  text-shadow: 2px 2px 20px rgb(105, 102, 240);
 }
 .modalBody {
   padding: 10px;
@@ -63,7 +63,7 @@
   margin-top: 5px;
 }
 
-.closeButton {
+.submitButton {
   position: absolute;
   bottom: 20px;
   right: 5px;
@@ -79,13 +79,13 @@
   border-top-left-radius: 15px 20px;
   border-bottom-right-radius: 15px 20px;
   border-bottom-left-radius: 15px 20px;
-  font-size: 13px;
+  font-size: 16px;
   font-style: oblique;
   font-weight: bold;
   cursor: pointer;
 }
 
-.submitButton {
+/* .submitButton {
   display: grid;
   width: 100px;
   margin: auto;
@@ -102,7 +102,7 @@
   font-style: oblique;
   font-weight: bold;
   cursor: pointer;
-}
+} */
 
 .modalButton,
 .submitButton:hover {

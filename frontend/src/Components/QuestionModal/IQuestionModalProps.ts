@@ -4,7 +4,7 @@ export interface IQuestionModalProps {
   answer: string;
   activePlayerIndex: number | null;
   activePlayersLength: number;
-  onClose(): void;
+  onClose(isFromFalse: boolean): void;
   addListener: () => void;
   resetActivePlayer: () => void;
 }

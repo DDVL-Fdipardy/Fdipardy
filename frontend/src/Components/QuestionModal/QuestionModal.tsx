@@ -22,15 +22,14 @@ const QuestionModal = (props: IQuestionModalProps) => {
     if (inputValue.toLowerCase() === answer.toLowerCase()) {
       setIsPlayerAnswerValid("True");
       setTimeout(() => {
-        onClose();
+        onClose(false);
       }, 1000);
     } else {
       setIsPlayerAnswerValid("False");
       addListener();
       if (activePlayersLength === 0) {
-        setTimeout(() => {
-          onClose();
-        }, 1000);
+        onClose(true);
+        return;
       }
     }
     setTimeout(() => {
@@ -60,7 +59,6 @@ const QuestionModal = (props: IQuestionModalProps) => {
         message = "Wrong answer!";
         break;
       default:
-        message = "";
         break;
     }
 
@@ -94,9 +92,6 @@ const QuestionModal = (props: IQuestionModalProps) => {
           <h4>Active player: Player {activePlayerIndex}</h4>
           <button className={styles.submitButton} onClick={handleSubmit} disabled={isSubmitDisabled}>
             Submit
-          </button>
-          <button className={styles.closeButton} onClick={onClose}>
-            Close
           </button>
         </div>
       </div>
