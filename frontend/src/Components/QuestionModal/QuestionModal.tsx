@@ -1,3 +1,4 @@
+import { ModalMessages } from "../../Helpers/ModalMessages";
 import { checkWhitespaces } from "../../Helpers/helper";
 import { IQuestionModalProps } from "./IQuestionModalProps";
 import styles from "./QuestionModal.module.css";
@@ -15,30 +16,30 @@ const QuestionModal = (props: IQuestionModalProps) => {
     resetActivePlayer,
   } = props;
   const [inputValue, setInputValue] = useState<string>("");
-  const [messageState, setMessageState] = useState("");
+  const [messageState, setMessageState] = useState(ModalMessages.EMPTY);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(false);
 
   useEffect(() => {
     if (activePlayerIndex === null) {
       setIsSubmitDisabled(true);
-      setMessageState("Null player");
+      setMessageState(ModalMessages.NOPLAYER);
     } else {
       setIsSubmitDisabled(false);
-      setMessageState("");
+      setMessageState(ModalMessages.EMPTY);
     }
   }, [activePlayerIndex]);
 
   const handleSubmit = () => {
     if (inputValue.toLowerCase() === answer.toLowerCase()) {
-      setMessageState("True");
+      setMessageState(ModalMessages.TRUE);
       setTimeout(() => {
         onClose(false);
       }, 1000);
     } else {
-      setMessageState("False");
+      setMessageState(ModalMessages.FALSE);
       addListener();
       if (activePlayersLength === 0) {
-        setMessageState("No winner");
+        setMessageState(ModalMessages.NOWINNER);
         setTimeout(() => {
           onClose(true);
         }, 2000);
@@ -51,7 +52,7 @@ const QuestionModal = (props: IQuestionModalProps) => {
   };
 
   const modalCleanUp = () => {
-    setMessageState("");
+    setMessageState(ModalMessages.EMPTY);
     setInputValue("");
     resetActivePlayer();
   };
@@ -60,30 +61,30 @@ const QuestionModal = (props: IQuestionModalProps) => {
     setInputValue(newValue);
     if (checkWhitespaces(newValue)) {
       setIsSubmitDisabled(true);
-      setMessageState("Long answer");
+      setMessageState(ModalMessages.LONG);
       return;
     }
     setIsSubmitDisabled(false);
-    setMessageState("");
+    setMessageState(ModalMessages.EMPTY);
   };
 
   const handleDisplayMessage = () => {
     let message = "";
 
     switch (messageState) {
-      case "True":
+      case ModalMessages.TRUE:
         message = "True answer!";
         break;
-      case "False":
+      case ModalMessages.FALSE:
         message = "Wrong answer!";
         break;
-      case "No winner":
+      case ModalMessages.NOWINNER:
         message = `Right answer: ${answer}`;
         break;
-      case "Long answer":
+      case ModalMessages.LONG:
         message = "Answer must consist of one word only!";
         break;
-      case "Null player":
+      case ModalMessages.NOPLAYER:
         message = "Player must be selected!";
         break;
       default:
