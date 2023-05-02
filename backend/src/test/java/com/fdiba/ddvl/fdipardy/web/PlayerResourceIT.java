@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class PlayerResourceIT {
+class PlayerResourceIT {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -71,7 +71,7 @@ public class PlayerResourceIT {
     }
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         this.mockMvc = MockMvcBuilders
                 .webAppContextSetup(this.webApplicationContext)
                 .build();
@@ -91,12 +91,12 @@ public class PlayerResourceIT {
     }
 
     @AfterEach
-    public void afterEach(){
+    void afterEach(){
         playerRepository.deleteAll();
     }
 
     @Test
-    public void createPlayer_isStatusOk() throws Exception {
+    void createPlayer_isStatusOk() throws Exception {
         Player player = createEntity(entityManager);
         final byte[] playerAsBytes = objectMapper.writeValueAsBytes(player);
 
@@ -110,7 +110,7 @@ public class PlayerResourceIT {
     }
 
     @Test
-    public void createPlayer_isStatusNotFound() throws Exception {
+    void createPlayer_isStatusNotFound() throws Exception {
         Player player = createEntity(entityManager);
         final byte[] playerAsBytes = objectMapper.writeValueAsBytes(player);
 
@@ -120,7 +120,7 @@ public class PlayerResourceIT {
     }
 
     @Test
-    public void createPlayer_StatusIsMethodNotAllowed() throws Exception {
+    void createPlayer_StatusIsMethodNotAllowed() throws Exception {
         Player player = createEntity(entityManager);
         final byte[] playerAsBytes = objectMapper.writeValueAsBytes(player);
 
@@ -130,7 +130,7 @@ public class PlayerResourceIT {
     }
 
     @Test
-    public void updatePlayer_isStatusOk() throws Exception {
+    void updatePlayer_isStatusOk() throws Exception {
         Player player = createEntity(entityManager);
         playerRepository.save(player);
 
@@ -150,7 +150,7 @@ public class PlayerResourceIT {
     }
 
     @Test
-    public void updatePlayer_isStatusNotFound() throws Exception {
+    void updatePlayer_isStatusNotFound() throws Exception {
         Player player = createEntity(entityManager);
         playerRepository.save(player);
 
@@ -170,7 +170,7 @@ public class PlayerResourceIT {
     }
 
     @Test
-    public void updatePlayer_isMethodNotAllowed() throws Exception {
+    void updatePlayer_isMethodNotAllowed() throws Exception {
         Player player = createEntity(entityManager);
         playerRepository.save(player);
 
@@ -190,7 +190,7 @@ public class PlayerResourceIT {
     }
 
     @Test
-    public void getAllPlayers_isOK() throws Exception {
+    void getAllPlayers_isOK() throws Exception {
         List<Player> players = playerRepository.findAll();
         final byte[] playersAsBytes = objectMapper.writeValueAsBytes(players);
 
@@ -203,7 +203,7 @@ public class PlayerResourceIT {
     }
 
     @Test
-    public void getAllPlayers_isMethodNotAllowed() throws Exception {
+    void getAllPlayers_isMethodNotAllowed() throws Exception {
         List<Player> players = playerRepository.findAll();
         final byte[] playersAsBytes = objectMapper.writeValueAsBytes(players);
 
@@ -216,7 +216,7 @@ public class PlayerResourceIT {
     }
 
     @Test
-    public void getOnePlayer_isOk() throws Exception {
+    void getOnePlayer_isOk() throws Exception {
         List<Player> players = playerRepository.findAll();
         Player player = players.get(0);
         final byte[] playerAsBytes = objectMapper.writeValueAsBytes(player);
@@ -234,7 +234,7 @@ public class PlayerResourceIT {
     }
 
     @Test
-    public void getOnePlayer_isMethodNotAllowed() throws Exception {
+    void getOnePlayer_isMethodNotAllowed() throws Exception {
         List<Player> players = playerRepository.findAll();
         Player player = players.get(0);
         final byte[] playerAsBytes = objectMapper.writeValueAsBytes(player);
@@ -248,7 +248,7 @@ public class PlayerResourceIT {
     }
 
     @Test
-    public void deletePlayer_isMethodNotAllowed() throws Exception {
+    void deletePlayer_isMethodNotAllowed() throws Exception {
         List<Player> players = playerRepository.findAll();
         Player player = players.get(0);
         final byte[] playerAsBytes = objectMapper.writeValueAsBytes(player);

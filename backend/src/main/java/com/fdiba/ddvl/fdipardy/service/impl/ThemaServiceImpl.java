@@ -28,7 +28,6 @@ public class ThemaServiceImpl implements ThemaService {
 
     @Override
     public List<Thema> getAll() {
-        List<Thema> themas = themaRepository.findAll();
-        return themas;
+        return themaRepository.findAll();
     }
 }
