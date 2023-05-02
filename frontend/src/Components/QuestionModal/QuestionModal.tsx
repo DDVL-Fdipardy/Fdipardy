@@ -28,7 +28,11 @@ const QuestionModal = (props: IQuestionModalProps) => {
       setIsPlayerAnswerValid("False");
       addListener();
       if (activePlayersLength === 0) {
-        onClose(true);
+        setIsPlayerAnswerValid("No winner");
+        setTimeout(() => {
+          onClose(true);
+        }, 2000);
+        //onClose(true);
         return;
       }
     }
@@ -57,6 +61,9 @@ const QuestionModal = (props: IQuestionModalProps) => {
         break;
       case "False":
         message = "Wrong answer!";
+        break;
+      case "No winner":
+        message = `Right answer: ${answer}`;
         break;
       default:
         break;
