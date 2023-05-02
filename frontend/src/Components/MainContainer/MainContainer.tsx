@@ -7,8 +7,6 @@ import { httpService } from "../../Services/httpService";
 import { ICategory, IFullCategory } from "../../Types/ICategory";
 import { IAnswer } from "../../Types/IAnswer";
 import { generateFullCategories } from "../../Helpers/helper";
-import { Player } from "./IPlayer";
-import { cloneDeep } from "lodash";
 
 const MainContainer = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -38,7 +36,6 @@ const MainContainer = () => {
   }, [categories, answers]);
 
   const handlePointsDistribution = (playerIdx: number | null, points: number) => {
-    console.log(playerIdx);
     if (playerIdx === 1) {
       setPlayer1((prevPlayer1) => prevPlayer1 + points);
     } else if (playerIdx === 2) {
