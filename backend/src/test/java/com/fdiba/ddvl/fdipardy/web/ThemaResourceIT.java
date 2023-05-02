@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class ThemaResourceIT {
+class ThemaResourceIT {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -50,7 +50,7 @@ public class ThemaResourceIT {
     private static final int THEMAS_COUNT = 5;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         this.mockMvc = MockMvcBuilders
                 .webAppContextSetup(this.webApplicationContext)
                 .build();
@@ -62,7 +62,7 @@ public class ThemaResourceIT {
     }
 
     @Test
-    public void getAllThemas_isOK() throws Exception {
+    void getAllThemas_isOK() throws Exception {
         List<Thema> themas = themaRepository.findAll();
         final byte[] themasAsBytes = objectMapper.writeValueAsBytes(themas);
 
@@ -77,7 +77,7 @@ public class ThemaResourceIT {
     }
 
     @Test
-    public void getAllThemas_isNotFound() throws Exception {
+    void getAllThemas_isNotFound() throws Exception {
         List<Thema> themas = themaRepository.findAll();
         final byte[] themasAsBytes = objectMapper.writeValueAsBytes(themas);
 
@@ -91,7 +91,7 @@ public class ThemaResourceIT {
     }
 
     @Test
-    public void getOneThema_isOK() throws Exception {
+    void getOneThema_isOK() throws Exception {
         List<Thema> themas = themaRepository.findAll();
 
         int min = 0;
@@ -111,7 +111,7 @@ public class ThemaResourceIT {
     }
 
     @Test
-    public void getOneAnswers_isNotFound() throws Exception {
+    void getOneAnswers_isNotFound() throws Exception {
         List<Thema> themas = themaRepository.findAll();
 
         int min = 0;
