@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class QuestionResourceIT {
+class QuestionResourceIT {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
@@ -49,7 +49,7 @@ public class QuestionResourceIT {
     private static final int QUESTIONS_COUNT = 25;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         this.mockMvc = MockMvcBuilders
                 .webAppContextSetup(this.webApplicationContext)
                 .build();
@@ -61,7 +61,7 @@ public class QuestionResourceIT {
     }
 
     @Test
-    public void getAllQuestions_isOK() throws Exception {
+    void getAllQuestions_isOK() throws Exception {
         List<Question> questions = questionRepository.findAll();
         final byte[] questionsAsBytes = objectMapper.writeValueAsBytes(questions);
 
@@ -76,7 +76,7 @@ public class QuestionResourceIT {
     }
 
     @Test
-    public void getAllQuestions_isNotFound() throws Exception {
+    void getAllQuestions_isNotFound() throws Exception {
         List<Question> questions = questionRepository.findAll();
         final byte[] questionsAsBytes = objectMapper.writeValueAsBytes(questions);
 
@@ -90,7 +90,7 @@ public class QuestionResourceIT {
     }
 
     @Test
-    public void getOneQuestion_isOK() throws Exception {
+    void getOneQuestion_isOK() throws Exception {
         List<Question> questions = questionRepository.findAll();
 
         int min = 0;
@@ -110,7 +110,7 @@ public class QuestionResourceIT {
     }
 
     @Test
-    public void getOneAnswers_isNotFound() throws Exception {
+    void getOneAnswers_isNotFound() throws Exception {
         List<Question> questions = questionRepository.findAll();
 
         int min = 0;
