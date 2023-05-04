@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fdiba.ddvl.fdipardy.FdipardyApplication;
+import com.fdiba.ddvl.fdipardy.config.PostgresqlContainer;
 import com.fdiba.ddvl.fdipardy.domain.Question;
 import com.fdiba.ddvl.fdipardy.repository.QuestionRepository;
+import org.junit.ClassRule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testcontainers.containers.PostgreSQLContainer;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -45,6 +48,9 @@ class QuestionResourceIT {
 
     @Autowired
     private QuestionRepository questionRepository;
+
+    @ClassRule
+    public static PostgreSQLContainer postgreSQLContainer = PostgresqlContainer.getInstance();
 
     private static final int QUESTIONS_COUNT = 25;
 

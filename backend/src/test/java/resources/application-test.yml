@@ -1,0 +1,13 @@
+spring:
+
+  datasource:
+    url: jdbc:h2:mem:demo;DB_CLOSE_ON_EXIT=FALSE;NON_KEYWORDS=USER;DATABASE_TO_LOWER=TRUE;
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+
+  liquibase:
+    contexts: test
+    change-log: classpath:db/changelog/main.xml
+
+
