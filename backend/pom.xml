@@ -82,6 +82,20 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--TEST CONTAINER-->
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers</artifactId>
+			<version>1.11.4</version>
+		</dependency>
+
+		<!--POSTGRES MODULE FOR TEST CONTAINER-->
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>postgresql </artifactId>
+			<version>1.11.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
