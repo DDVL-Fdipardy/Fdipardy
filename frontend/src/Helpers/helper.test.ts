@@ -1,7 +1,7 @@
 import { ICategory } from "../Types/ICategory";
 import { IQuestion, IQuestionWithAnswer } from "../Types/IQuestion";
 import { IAnswer } from "../Types/IAnswer";
-import { generateFullCategories } from "./helper";
+import { generateFullCategories, isWhitespaceIncluded } from "./helper";
 
 describe("generateFullCategories", () => {
   const mockQuestions: IQuestion[] = [
@@ -72,5 +72,19 @@ describe("generateFullCategories", () => {
   it("Returns an empty array if answer array is empty", () => {
     const funcResult = generateFullCategories([mockCategory], []);
     expect(funcResult).toHaveLength(0);
+  });
+});
+
+describe("checkWhitespaces", () => {
+  it("Correctly detects a whitespace", () => {
+    const value = "Super man";
+    const funcResult = isWhitespaceIncluded(value);
+    expect(funcResult).toBe(true);
+  });
+
+  it("Correctly detects the abscence of whitespace", () => {
+    const value = "Batman";
+    const funcResult = isWhitespaceIncluded(value);
+    expect(funcResult).toBe(false);
   });
 });

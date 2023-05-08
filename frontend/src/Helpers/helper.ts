@@ -6,14 +6,12 @@ export const generateFullCategories = (categories: ICategory[], answers: IAnswer
   if (categories.length === 0 || answers.length === 0) return [];
   const questions: IQuestion[] = [];
 
-  // push all questions into one array
   categories.forEach((category) =>
     category.questions.forEach((question) => {
       questions.push(question);
     })
   );
 
-  // handle appending answer to relevant question
   const extendedQuestions: IQuestionWithAnswer[] = questions.map((question) => {
     const extendedQuestion: IQuestionWithAnswer = { ...question, answer: "" };
     const answer: IAnswer | undefined = answers.find((answer) => answer.id === question.answerId);
@@ -21,7 +19,6 @@ export const generateFullCategories = (categories: ICategory[], answers: IAnswer
     return extendedQuestion;
   });
 
-  // handle creating a category with all its questions with answers
   const extendedCategories: IFullCategory[] = categories.map((category) => {
     const relevantFullQuestions: IQuestionWithAnswer[] = [];
     extendedQuestions.forEach((fullQuestion) => {
@@ -35,7 +32,7 @@ export const generateFullCategories = (categories: ICategory[], answers: IAnswer
   return extendedCategories;
 };
 
-export const checkWhitespaces = (value: string): boolean => {
+export const isWhitespaceIncluded = (value: string): boolean => {
   if (value.includes(" ")) return true;
   return false;
 };
