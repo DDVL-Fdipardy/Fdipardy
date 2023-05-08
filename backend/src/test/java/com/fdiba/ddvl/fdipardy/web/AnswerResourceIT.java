@@ -5,10 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fdiba.ddvl.fdipardy.FdipardyApplication;
+import com.fdiba.ddvl.fdipardy.config.PostgresqlContainer;
 import com.fdiba.ddvl.fdipardy.domain.Answer;
 import com.fdiba.ddvl.fdipardy.repository.AnswerRepository;
 import com.fdiba.ddvl.fdipardy.service.mapper.AnswerMapper;
-import org.junit.jupiter.api.Assertions;
+import org.junit.ClassRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,10 +22,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testcontainers.containers.PostgreSQLContainer;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -53,6 +56,9 @@ class AnswerResourceIT {
 
     private static final int ANSWERS_COUNT = 25;
 
+    @ClassRule
+    public static PostgreSQLContainer postgreSQLContainer = PostgresqlContainer.getInstance();
+
     @BeforeEach
     void setup(){
         this.mockMvc = MockMvcBuilders
@@ -76,7 +82,7 @@ class AnswerResourceIT {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        Assertions.assertEquals(ANSWERS_COUNT,answers.size());
+        assertEquals(ANSWERS_COUNT,answers.size());
 
     }
 
