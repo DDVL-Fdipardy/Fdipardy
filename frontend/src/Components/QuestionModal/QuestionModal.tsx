@@ -1,5 +1,5 @@
 import { ModalMessages } from "../../Helpers/ModalMessages";
-import { checkWhitespaces } from "../../Helpers/helper";
+import { isWhitespaceIncluded } from "../../Helpers/helper";
 import { IQuestionModalProps } from "./IQuestionModalProps";
 import styles from "./QuestionModal.module.css";
 import { useEffect, useState } from "react";
@@ -59,7 +59,7 @@ const QuestionModal = (props: IQuestionModalProps) => {
 
   const handleChange = (newValue: string) => {
     setInputValue(newValue);
-    if (checkWhitespaces(newValue)) {
+    if (isWhitespaceIncluded(newValue)) {
       setIsSubmitDisabled(true);
       setMessageState(ModalMessages.LONG);
       return;

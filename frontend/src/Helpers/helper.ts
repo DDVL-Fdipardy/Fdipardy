@@ -35,7 +35,7 @@ export const generateFullCategories = (categories: ICategory[], answers: IAnswer
   return extendedCategories;
 };
 
-export const checkWhitespaces = (value: string): boolean => {
+export const isWhitespaceIncluded = (value: string): boolean => {
   if (value.includes(" ")) return true;
   return false;
 };
