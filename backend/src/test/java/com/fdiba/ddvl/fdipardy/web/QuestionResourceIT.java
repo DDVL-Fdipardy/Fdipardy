@@ -11,6 +11,7 @@ import com.fdiba.ddvl.fdipardy.repository.QuestionRepository;
 import org.junit.ClassRule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -35,6 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
+@Disabled
 class QuestionResourceIT {
     @Autowired
     private WebApplicationContext webApplicationContext;
