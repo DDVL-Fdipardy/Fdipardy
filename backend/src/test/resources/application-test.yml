@@ -4,6 +4,9 @@ spring:
     url: jdbc:tc:postgresql:14.1:///integration-tests-db
     username: test
     password: test
+  liquibase:
+    contexts: test
+    change-log: classpath:db/changelog/main.xml
 
   jpa:
     ddl-auto: create
